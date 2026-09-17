@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Smart — Urinary System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F2E8;
+    --panel:#FFFFFF;
+    --ink:#1E2A29;
+    --ink-soft:#4B5B57;
+    --line:#DED2B8;
+    --amber:#B9752A;
+    --amber-deep:#8F5A1E;
+    --teal:#2E6C64;
+    --teal-deep:#1E4B45;
+    --red:#A63A2E;
+    --paper-2:#EFE8D8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4{
+    font-family:'Lora',serif;
+    font-weight:600;
+    margin:0 0 .4em 0;
+    color:var(--ink);
+  }
+  p{margin:0 0 .8em 0;}
+  ::selection{background:var(--amber);color:#fff;}
+
+  /* ---------- Header / masthead ---------- */
+  .masthead{
+    border-bottom:2px solid var(--ink);
+    padding:26px clamp(16px,4vw,48px) 18px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .masthead-title{
+    font-family:'Lora',serif;
+    font-weight:700;
+    font-style:italic;
+    font-size:clamp(28px,4.4vw,44px);
+    letter-spacing:-0.5px;
+    line-height:1;
+    color:var(--teal-deep);
+  }
+  .masthead-title span{color:var(--amber-deep);}
+  .masthead-sub{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+    letter-spacing:.02em;
+    text-align:right;
+    max-width:260px;
+  }
+
+  /* ---------- Layout: chart-tab rail + content ---------- */
+  .frame{
+    display:flex;
+    align-items:flex-start;
+    max-width:1180px;
+    margin:0 auto;
+    padding:28px clamp(12px,3vw,32px) 60px;
+    gap:22px;
+  }
+  .rail{
+    position:sticky;
+    top:20px;
+    display:flex;
+    flex-direction:column;
+    width:196px;
+    flex:0 0 196px;
+  }
+  .rail button{
+    all:unset;
+    cursor:pointer;
+    font-family:'IBM Plex Sans',sans-serif;
+    font-weight:600;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-right:none;
+    padding:14px 16px;
+    margin-bottom:-1px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    transition:background .15s ease,color .15s ease,padding-left .15s ease;
+  }
+  .rail button .tab-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--amber-deep);
+    opacity:.75;
+  }
+  .rail button:hover{background:#fff;padding-left:20px;}
+  .rail button.active{
+    background:var(--panel);
+    color:var(--ink);
+    border-color:var(--ink);
+    border-right:1px solid var(--panel);
+    position:relative;
+    z-index:2;
+    padding-left:20px;
+  }
+  .rail button.active .tab-num{color:var(--red);opacity:1;}
+
+  .content{
+    flex:1;
+    min-width:0;
+    background:var(--panel);
+    border:1px solid var(--ink);
+    padding:clamp(18px,3.4vw,40px);
+    min-height:560px;
+  }
+  .panel{display:none;}
+  .panel.active{display:block;}
+  .panel-head{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    border-bottom:2px solid var(--ink);
+    padding-bottom:12px;
+    margin-bottom:22px;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .panel-head h2{font-size:clamp(22px,3vw,28px);}
+  .panel-head .tag{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:var(--teal-deep);
+    background:#E7EFE9;
+    border:1px solid #C6D9CC;
+    padding:4px 10px;
+    white-space:nowrap;
+  }
+
+  /* ---------- Overview ---------- */
+  .rule-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:14px;
+  }
+  .rule-card{
+    border:1px solid var(--line);
+    border-left:4px solid var(--teal);
+    padding:14px 16px;
+    background:var(--paper);
+  }
+  .rule-card.amber{border-left-color:var(--amber);}
+  .rule-card.red{border-left-color:var(--red);}
+  .rule-card h4{
+    font-size:14.5px;
+    margin-bottom:6px;
+    color:var(--teal-deep);
+  }
+  .rule-card.amber h4{color:var(--amber-deep);}
+  .rule-card.red h4{color:var(--red);}
+  .rule-card p{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  .rule-card b{color:var(--ink);}
+  .section-lead{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    margin-bottom:18px;
+    max-width:70ch;
+  }
+  .subhead{
+    font-family:'Lora',serif;
+    font-size:16.5px;
+    font-weight:600;
+    margin:26px 0 10px;
+    color:var(--ink);
+    padding-top:16px;
+    border-top:1px dashed var(--line);
+  }
+  .subhead:first-of-type{border-top:none;padding-top:0;margin-top:0;}
+
+  /* ---------- Diagrams ---------- */
+  .diagram-block{
+    border:1px solid var(--line);
+    padding:18px;
+    margin-bottom:26px;
+    background:var(--paper);
+  }
+  .diagram-block h3{
+    font-size:16px;
+    margin-bottom:4px;
+  }
+  .diagram-hint{
+    font-size:12.5px;
+    font-family:'IBM Plex Mono',monospace;
+    color:var(--ink-soft);
+    margin-bottom:14px;
+  }
+
+  /* filtration barrier */
+  .barrier-wrap{display:flex;gap:16px;flex-wrap:wrap;align-items:stretch;}
+  .barrier-layers{
+    display:flex;
+    gap:8px;
+    flex:1 1 320px;
+  }
+  .layer{
+    flex:1;
+    border:2px solid var(--line);
+    background:#fff;
+    padding:12px 8px;
+    text-align:center;
+    cursor:pointer;
+    font-size:12.5px;
+    font-weight:600;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:88px;
+    transition:all .15s ease;
+  }
+  .layer:hover{border-color:var(--teal);color:var(--teal-deep);}
+  .layer.active{
+    background:var(--teal);
+    border-color:var(--teal-deep);
+    color:#fff;
+  }
+  .barrier-detail{
+    flex:1 1 300px;
+    border:1px solid var(--line);
+    background:#fff;
+    padding:14px 16px;
+    font-size:14px;
+    color:var(--ink-soft);
+    min-height:88px;
+  }
+  .barrier-detail b{color:var(--ink);}
+
+  /* nephritic/nephrotic toggle */
+  .toggle-row{display:flex;gap:0;margin-bottom:14px;border:1px solid var(--ink);width:fit-content;}
+  .toggle-row button{
+    all:unset;cursor:pointer;
+    padding:8px 18px;
+    font-weight:600;
+    font-size:13.5px;
+    color:var(--ink-soft);
+  }
+  .toggle-row button.on{background:var(--ink);color:#fff;}
+  .compare-table{width:100%;border-collapse:collapse;font-size:14px;}
+  .compare-table td{
+    border:1px solid var(--line);
+    padding:9px 12px;
+    vertical-align:top;
+  }
+  .compare-table tr td:first-child{
+    width:40%;
+    font-weight:600;
+    background:var(--paper);
+    color:var(--teal-deep);
+  }
+  .compare-hidden{display:none;}
+
+  /* GFR scale */
+  .gfr-scale{position:relative;height:56px;margin:20px 0 6px;}
+  .gfr-track{
+    position:absolute;top:24px;left:0;right:0;height:8px;
+    background:linear-gradient(90deg,var(--red),var(--amber) 35%,#D8C24A 65%,var(--teal));
+  }
+  .gfr-stage{
+    position:absolute;top:0;
+    width:26px;height:26px;
+    border-radius:50%;
+    background:#fff;border:3px solid var(--ink);
+    cursor:pointer;
+    transform:translateX(-50%);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10px;font-weight:700;
+    transition:transform .15s ease;
+  }
+  .gfr-stage:hover{transform:translateX(-50%) scale(1.15);}
+  .gfr-stage.active{background:var(--ink);color:#fff;}
+  .gfr-labels{display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:4px;}
+  .gfr-detail{
+    margin-top:16px;
+    border:1px solid var(--line);
+    background:#fff;
+    padding:14px 16px;
+    font-size:14px;
+    color:var(--ink-soft);
+  }
+  .gfr-detail b{color:var(--ink);}
+
+  /* causes accordion / consequences grid */
+  .click-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;}
+  .click-chip{
+    border:1.5px solid var(--line);
+    background:#fff;
+    padding:10px 12px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+  .click-chip:hover{border-color:var(--amber);color:var(--amber-deep);}
+  .click-chip.active{background:var(--amber);border-color:var(--amber-deep);color:#fff;}
+  .click-detail{
+    margin-top:14px;
+    border:1px solid var(--line);
+    background:#fff;
+    padding:14px 16px;
+    font-size:14px;
+    color:var(--ink-soft);
+    min-height:50px;
+  }
+  .click-detail b{color:var(--ink);}
+
+  /* ---------- Mini map ---------- */
+  .map-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .map-node{
+    border:1.5px solid var(--teal);
+    color:var(--teal-deep);
+    background:#fff;
+    padding:12px 10px;
+    font-size:13px;
+    font-weight:600;
+    text-align:center;
+    cursor:pointer;
+    transition:all .12s ease;
+  }
+  .map-node:hover{background:var(--teal);color:#fff;}
+  .map-node.active{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff;}
+  .map-display{
+    border:2px solid var(--ink);
+    background:var(--paper);
+    padding:20px 22px;
+    min-height:150px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .map-display h3{color:var(--ink);font-size:18px;margin-bottom:8px;}
+  .map-display .placeholder{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    color:#9b9382;
+  }
+  .map-display b{color:var(--ink);}
+  .map-display ul{margin:0;padding-left:20px;}
+  .map-display li{margin-bottom:5px;}
+
+  /* ---------- Level selector (Flashcards + Quiz) ---------- */
+  .level-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+  .level-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-soft);letter-spacing:.04em;text-transform:uppercase;}
+  .level-btn{
+    all:unset;cursor:pointer;
+    font-weight:600;font-size:13px;
+    padding:7px 14px;
+    border:1.5px solid var(--ink);
+    color:var(--ink);
+  }
+  .level-btn:hover{background:var(--ink);color:#fff;}
+  .level-btn.active{background:var(--teal-deep);border-color:var(--teal-deep);color:#fff;}
+
+  /* ---------- Flashcards ---------- */
+  .fc-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
+  .fc-count{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--ink-soft);}
+  .fc-btn{
+    all:unset;cursor:pointer;
+    font-weight:600;font-size:13px;
+    padding:7px 14px;
+    border:1.5px solid var(--ink);
+    color:var(--ink);
+  }
+  .fc-btn:hover{background:var(--ink);color:#fff;}
+  .fc-stage{display:flex;align-items:center;gap:14px;justify-content:center;}
+  .fc-nav-btn{
+    all:unset;cursor:pointer;
+    width:38px;height:38px;
+    border:1.5px solid var(--ink);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;font-weight:700;
+    flex:0 0 auto;
+  }
+  .fc-nav-btn:hover{background:var(--ink);color:#fff;}
+  .flashcard{
+    flex:1;max-width:640px;
+    min-height:220px;
+    perspective:1400px;
+    cursor:pointer;
+  }
+  .flashcard-inner{
+    position:relative;width:100%;height:220px;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+    transform-style:preserve-3d;
+  }
+  .flashcard.flipped .flashcard-inner{transform:rotateY(180deg);}
+  .fc-face{
+    position:absolute;inset:0;
+    backface-visibility:hidden;
+    border:2px solid var(--ink);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:24px;
+    background:#fff;
+  }
+  .fc-face.front{background:var(--paper-2);}
+  .fc-face.back{
+    transform:rotateY(180deg);
+    background:#EFF6F1;
+  }
+  .fc-eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    color:var(--amber-deep);
+    margin-bottom:10px;
+    letter-spacing:.03em;
+  }
+  .fc-face.back .fc-eyebrow{color:var(--teal-deep);}
+  .fc-text{font-family:'Lora',serif;font-size:17px;font-weight:600;color:var(--ink);}
+  .fc-face.back .fc-text{font-family:'IBM Plex Sans',sans-serif;font-weight:400;font-size:14.5px;color:var(--ink-soft);text-align:left;}
+  .fc-hint{position:absolute;bottom:10px;right:14px;font-size:11px;color:#9b9382;font-family:'IBM Plex Mono',monospace;}
+
+  /* ---------- Quiz ---------- */
+  .quiz-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
+  .quiz-score{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:13px;
+    border:1px solid var(--ink);
+    padding:6px 12px;
+  }
+  .quiz-list{display:flex;flex-direction:column;gap:16px;}
+  .q-card{border:1px solid var(--line);padding:16px 18px;background:var(--paper);}
+  .q-card .q-num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;color:var(--amber-deep);margin-bottom:6px;
+  }
+  .q-text{font-weight:600;margin-bottom:12px;font-size:15px;}
+  .q-options{display:flex;flex-direction:column;gap:8px;}
+  .q-opt{
+    all:unset;cursor:pointer;
+    display:flex;gap:10px;align-items:flex-start;
+    border:1.5px solid var(--line);
+    background:#fff;
+    padding:9px 12px;
+    font-size:14px;
+    color:var(--ink);
+  }
+  .q-opt:hover{border-color:var(--teal);}
+  .q-opt .marker{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:700;
+    color:var(--ink-soft);
+    flex:0 0 auto;
+  }
+  .q-opt.correct{background:#E7F3EA;border-color:var(--teal);}
+  .q-opt.correct .marker{color:var(--teal-deep);}
+  .q-opt.wrong{background:#F7E9E6;border-color:var(--red);}
+  .q-opt.wrong .marker{color:var(--red);}
+  .q-opt.disabled{cursor:default;}
+  .q-explain{
+    margin-top:10px;
+    font-size:13px;
+    color:var(--ink-soft);
+    border-top:1px dashed var(--line);
+    padding-top:8px;
+    display:none;
+  }
+  .q-explain.show{display:block;}
+
+  /* ---------- Footer ---------- */
+  .footer{
+    text-align:center;
+    padding:22px 16px 34px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    color:#8f8877;
+    border-top:1px solid var(--line);
+    max-width:1180px;
+    margin:0 auto;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:820px){
+    .frame{flex-direction:column;}
+    .rail{
+      position:static;
+      flex-direction:row;
+      width:100%;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+    }
+    .rail button{
+      border-right:1px solid var(--line);
+      border-bottom:none;
+      margin-bottom:0;
+      margin-right:-1px;
+      white-space:nowrap;
+    }
+    .rail button.active{border-bottom:1px solid var(--panel);}
+    .fc-stage{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-title">Study<span>Smart</span></div>
+  <div class="masthead-sub">URINARY SYSTEM &amp; RENAL PATHOPHYSIOLOGY<br>A five-part study reference</div>
+</header>
+
+<div class="frame">
+  <nav class="rail" id="rail">
+    <button data-panel="overview" class="active"><span class="tab-num">01</span> Overview</button>
+    <button data-panel="diagrams"><span class="tab-num">02</span> Interactive Diagrams</button>
+    <button data-panel="minimap"><span class="tab-num">03</span> Mini Map</button>
+    <button data-panel="flashcards"><span class="tab-num">04</span> Flash Cards</button>
+    <button data-panel="quiz"><span class="tab-num">05</span> Quiz Bank</button>
+  </nav>
+
+  <main class="content">
+
+    <!-- ================= 1. OVERVIEW ================= -->
+    <section class="panel active" id="overview">
+      <div class="panel-head"><h2>Overview</h2><span class="tag">key facts only</span></div>
+      <p class="section-lead">The rules, thresholds and definitions worth memorizing — no long lecture text.</p>
+
+      <div class="subhead">Kidney function</div>
+      <div class="rule-grid">
+        <div class="rule-card"><h4>Main job</h4><p>Make urine → control fluid &amp; electrolyte balance, eliminate waste.</p></div>
+        <div class="rule-card"><h4>Filtration</h4><p>Kidneys filter blood, then <b>reabsorb</b> and <b>secrete</b> ions.</p></div>
+        <div class="rule-card"><h4>Electrolytes controlled</h4><p><b>Na, K, Cl, CO2</b> and body fluid balance.</p></div>
+      </div>
+
+      <div class="subhead">Urinary tract infection (UTI)</div>
+      <div class="rule-grid">
+        <div class="rule-card amber"><h4>Etiology</h4><p>Bacterial infection into the urinary tract.</p></div>
+        <div class="rule-card amber"><h4>Signs &amp; symptoms</h4><p>Frequency, dysuria, hematuria, turbid urine, unusual odor, fever.</p></div>
+      </div>
+
+      <div class="subhead">Renal failure — the numbers</div>
+      <div class="rule-grid">
+        <div class="rule-card red"><h4>Definition</h4><p>Loss of renal function in both kidneys until only <b>10–20% of normal GFR</b> remains.</p></div>
+        <div class="rule-card red"><h4>Acute</h4><p>Abrupt onset — <b>potentially reversible</b>.</p></div>
+        <div class="rule-card red"><h4>Chronic</h4><p>Progresses over <b>≥ 3 months</b> — can become permanent.</p></div>
+      </div>
+
+      <div class="subhead">Stages of chronic renal failure (by GFR)</div>
+      <div class="rule-grid">
+        <div class="rule-card"><h4>Diminished renal reserve</h4><p>GFR <b>35–50%</b> of normal.</p></div>
+        <div class="rule-card"><h4>Renal insufficiency</h4><p>GFR <b>20–35%</b> of normal.</p></div>
+        <div class="rule-card"><h4>Renal failure</h4><p>GFR <b>&lt; 20%</b> of normal.</p></div>
+        <div class="rule-card"><h4>End-stage renal disease</h4><p>GFR <b>&lt; 5%</b> of normal.</p></div>
+      </div>
+
+      <div class="subhead">Glomerular vs. tubular dysfunction</div>
+      <div class="rule-grid">
+        <div class="rule-card"><h4>Glomerular dysfunction</h4><p>↓ GFR, retention of filtered substances incl. water — e.g. glomerulonephritis.</p></div>
+        <div class="rule-card"><h4>Tubular dysfunction</h4><p>Polyuria of dilute urine, low specific gravity, loss of electrolytes/nutrients — e.g. aminoglycoside nephrotoxicity.</p></div>
+      </div>
+
+      <div class="subhead">Consequences of falling GFR</div>
+      <div class="rule-grid">
+        <div class="rule-card"><h4>↓ Erythropoietin</h4><p>→ Anemia.</p></div>
+        <div class="rule-card"><h4>↓ Vitamin D</h4><p>→ Hypocalcemia, secondary hyperparathyroidism, hyperphosphatemia.</p></div>
+        <div class="rule-card"><h4>↓ Excretion</h4><p>→ Acidosis, hyperkalemia, hypertension, edema.</p></div>
+        <div class="rule-card"><h4>Platelet dysfunction</h4><p>→ Increased bleeding tendency.</p></div>
+      </div>
+
+      <div class="subhead">Nephritic syndrome — the rule</div>
+      <div class="rule-grid">
+        <div class="rule-card"><h4>Core definition</h4><p><b>Hematuria</b> + at least one of: oliguria (&lt;400 mL/24h), hypertension with mild-moderate proteinuria, uremic symptoms, edema, elevated BUN.</p></div>
+        <div class="rule-card"><h4>Mechanism</h4><p>Inflammation + thinning of GBM, pores form in podocytes → protein and RBCs leak into urine.</p></div>
+      </div>
+
+      <div class="subhead">Nephrotic syndrome — the rule</div>
+      <div class="rule-grid">
+        <div class="rule-card amber"><h4>Threshold</h4><p>Proteinuria <b>≥ 3.5 g/day</b> in adults.</p></div>
+        <div class="rule-card amber"><h4>Full picture</h4><p>Proteinuria + lipiduria + hypoalbuminemia + generalized edema + hyperlipidemia.</p></div>
+        <div class="rule-card amber"><h4>Primary causes</h4><p>Minimal change disease (most common — children), membranous nephropathy (most common — adults), FSGS, membranoproliferative GN.</p></div>
+        <div class="rule-card amber"><h4>Secondary causes</h4><p>DM, amyloidosis, infections (Hep B/C, HIV, syphilis), malignancy, drugs (NSAIDs, gold, penicillamine, heavy metals).</p></div>
+      </div>
+
+      <div class="subhead">Metabolic consequences of nephrotic syndrome</div>
+      <div class="rule-grid">
+        <div class="rule-card"><h4>Infection risk</h4><p>Loss of complement + immunoglobulin.</p></div>
+        <div class="rule-card"><h4>Hyperlipidemia</h4><p>↑ Hepatic LDL/VLDL synthesis → atherosclerosis.</p></div>
+        <div class="rule-card"><h4>Hypercoagulability</h4><p>Loss of antithrombin III.</p></div>
+        <div class="rule-card"><h4>Also seen</h4><p>Hypocalcemia, hypovolemia.</p></div>
+      </div>
+
+      <div class="subhead">Specific diseases — one line each</div>
+      <div class="rule-grid">
+        <div class="rule-card"><h4>Diabetic nephropathy</h4><p>Chronic albuminuria ≥3–6 months on 2 of 3 urine collections + DM history + retinopathy + HTN + ↓GFR.</p></div>
+        <div class="rule-card"><h4>Henoch–Schönlein purpura</h4><p>Systemic form of IgA nephropathy; children; palpable purpura, abdominal pain, arthritis; IgA deposits in glomerulus.</p></div>
+        <div class="rule-card"><h4>Systemic lupus erythematosus</h4><p>Autoantibody immune complexes deposit along GBM → glomerular inflammation → nephrotic syndrome.</p></div>
+        <div class="rule-card"><h4>Chronic glomerulonephritis</h4><p>Irreversible, progressive glomerular + tubulointerstitial fibrosis → CKD → ESRD.</p></div>
+        <div class="rule-card"><h4>Polycystic kidney disease</h4><p>Genetic; enlarged cystic kidneys, hypertension, UTI, dilute urine, pain, hematuria.</p></div>
+        <div class="rule-card"><h4>Interstitial nephritis</h4><p>Affects tubules/interstitium — does <b>not</b> cause nephrotic syndrome (glomeruli spared).</p></div>
+      </div>
+    </section>
+
+    <!-- ================= 2. DIAGRAMS ================= -->
+    <section class="panel" id="diagrams">
+      <div class="panel-head"><h2>Interactive Diagrams</h2><span class="tag">click to explore</span></div>
+      <p class="section-lead">Every diagram below responds to clicks — nothing here is static.</p>
+
+      <div class="diagram-block">
+        <h3>The glomerular filtration barrier</h3>
+        <p class="diagram-hint">Click each layer to see what it does and what happens when it's damaged.</p>
+        <div class="barrier-wrap">
+          <div class="barrier-layers" id="barrierLayers"></div>
+          <div class="barrier-detail" id="barrierDetail">Select a layer on the left.</div>
+        </div>
+      </div>
+
+      <div class="diagram-block">
+        <h3>Nephritic vs. Nephrotic syndrome</h3>
+        <p class="diagram-hint">Toggle between the two syndromes to compare their findings row by row.</p>
+        <div class="toggle-row" id="synToggle">
+          <button data-syn="nephritic" class="on">Nephritic</button>
+          <button data-syn="nephrotic">Nephrotic</button>
+        </div>
+        <table class="compare-table">
+          <tbody id="compareBody"></tbody>
+        </table>
+      </div>
+
+      <div class="diagram-block">
+        <h3>Chronic renal failure — the GFR scale</h3>
+        <p class="diagram-hint">Click a marker to reveal that stage's GFR range and meaning.</p>
+        <div class="gfr-scale" id="gfrScale"></div>
+        <div class="gfr-labels"><span>100% GFR</span><span>0% GFR</span></div>
+        <div class="gfr-detail" id="gfrDetail">Click a stage marker above.</div>
+      </div>
+
+      <div class="diagram-block">
+        <h3>Causes of chronic renal failure</h3>
+        <p class="diagram-hint">Click a cause to see why it damages the kidney.</p>
+        <div class="click-grid" id="causesGrid"></div>
+        <div class="click-detail" id="causesDetail">Select a cause above.</div>
+      </div>
+
+      <div class="diagram-block">
+        <h3>Consequences of a falling GFR</h3>
+        <p class="diagram-hint">Click a downstream effect to see the chain of events behind it.</p>
+        <div class="click-grid" id="consequenceGrid"></div>
+        <div class="click-detail" id="consequenceDetail">Select an effect above.</div>
+      </div>
+    </section>
+
+    <!-- ================= 3. MINI MAP ================= -->
+    <section class="panel" id="minimap">
+      <div class="panel-head"><h2>Mini Map</h2><span class="tag">click a title</span></div>
+      <p class="section-lead">Click any topic title below — the summary opens in the panel underneath it.</p>
+      <div class="map-grid" id="mapGrid"></div>
+      <div class="map-display" id="mapDisplay">
+        <span class="placeholder">// select a topic above to display it here</span>
+      </div>
+    </section>
+
+    <!-- ================= 4. FLASHCARDS ================= -->
+    <section class="panel" id="flashcards">
+      <div class="panel-head"><h2>Flash Cards</h2><span class="tag" id="fcTag">60 cards</span></div>
+      <p class="section-lead">Click the card to flip it. Use the arrows to move through the deck.</p>
+      <div class="level-bar">
+        <span class="level-label">Difficulty</span>
+        <button class="level-btn" data-fclevel="easy">Level 1 &middot; Easy</button>
+        <button class="level-btn" data-fclevel="medium">Level 2 &middot; Medium</button>
+        <button class="level-btn" data-fclevel="hard">Level 3 &middot; Hard</button>
+      </div>
+      <div class="fc-bar">
+        <span class="fc-count" id="fcCount">Card 1 / 36</span>
+        <button class="fc-btn" id="fcShuffle">Shuffle deck</button>
+      </div>
+      <div class="fc-stage">
+        <button class="fc-nav-btn" id="fcPrev">‹</button>
+        <div class="flashcard" id="flashcard">
+          <div class="flashcard-inner">
+            <div class="fc-face front">
+              <div class="fc-eyebrow">QUESTION</div>
+              <div class="fc-text" id="fcFront"></div>
+              <div class="fc-hint">click to flip</div>
+            </div>
+            <div class="fc-face back">
+              <div class="fc-eyebrow">ANSWER</div>
+              <div class="fc-text" id="fcBack"></div>
+              <div class="fc-hint">click to flip back</div>
+            </div>
+          </div>
+        </div>
+        <button class="fc-nav-btn" id="fcNext">›</button>
+      </div>
+    </section>
+
+    <!-- ================= 5. QUIZ ================= -->
+    <section class="panel" id="quiz">
+      <div class="panel-head"><h2>Quiz Bank</h2><span class="tag" id="quizTag">60 questions</span></div>
+      <p class="section-lead">Pick an answer for each question — it's checked instantly. Options are shuffled every time you reload.</p>
+      <div class="level-bar">
+        <span class="level-label">Difficulty</span>
+        <button class="level-btn" data-quizlevel="easy">Level 1 &middot; Easy</button>
+        <button class="level-btn" data-quizlevel="medium">Level 2 &middot; Medium</button>
+        <button class="level-btn" data-quizlevel="hard">Level 3 &middot; Hard</button>
+      </div>
+      <div class="quiz-bar">
+        <div class="quiz-score">Score: <span id="quizScore">0</span> / <span id="quizTotal">0</span></div>
+        <button class="fc-btn" id="quizReset">Reset quiz</button>
+      </div>
+      <div class="quiz-list" id="quizList"></div>
+    </section>
+
+  </main>
+</div>
+
+<div class="footer">© Anmar Taha — Study Smart. For educational review purposes only.</div>
+
+<script>
+/* ================= TAB SWITCHING ================= */
+const railButtons = document.querySelectorAll('.rail button');
+const panels = document.querySelectorAll('.panel');
+railButtons.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    railButtons.forEach(b=>b.classList.remove('active'));
+    panels.forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+  });
+});
+
+/* ================= DIAGRAM 1: FILTRATION BARRIER ================= */
+const barrierData = [
+  {name:'Fenestrated endothelium', detail:'<b>Fenestrated endothelium</b> — lines the glomerular capillaries; its pores let plasma and small solutes through but hold back blood cells.'},
+  {name:'Glomerular basement membrane', detail:'<b>Glomerular basement membrane (GBM)</b> — sits beneath the endothelium; a key size/charge barrier. Normally less than <b>0.1%</b> of plasma albumin crosses it.'},
+  {name:'Podocytes (epithelium)', detail:'<b>Podocytes</b> — glomerular epithelial cells wrapping the capillaries with foot processes; the gaps between them are the <b>filtration slits</b>. Damage here (podocyte injury, GBM thinning) opens pores that let protein and red cells leak into urine — the mechanism behind acute nephritic syndrome.'}
+];
+const barrierLayers = document.getElementById('barrierLayers');
+const barrierDetail = document.getElementById('barrierDetail');
+barrierData.forEach((layer,i)=>{
+  const el = document.createElement('div');
+  el.className='layer';
+  el.textContent = layer.name;
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('#barrierLayers .layer').forEach(l=>l.classList.remove('active'));
+    el.classList.add('active');
+    barrierDetail.innerHTML = layer.detail;
+  });
+  barrierLayers.appendChild(el);
+});
+
+/* ================= DIAGRAM 2: NEPHRITIC VS NEPHROTIC ================= */
+const compareData = {
+  nephritic:[
+    ['Urine output','Oliguria (&lt; 400 mL / 24h)'],
+    ['Blood in urine','Hematuria'],
+    ['Protein pattern','Non-selective proteinuria'],
+    ['Labs','GFR ↓, Creatinine ↑, BUN ↑'],
+    ['Fluid status','Edema from salt &amp; water retention'],
+    ['Blood pressure','Hypertension'],
+    ['Urine sediment','RBC casts &amp; protein casts']
+  ],
+  nephrotic:[
+    ['Protein loss','Proteinuria — "nephrotic range" &gt; 3.5 g / 24h'],
+    ['Fluid status','Edema (fluid retention + hypoalbuminemia)'],
+    ['Lipids','Hyperlipidemia'],
+    ['Urine appearance','Lipiduria'],
+    ['Urine sediment','Protein casts']
+  ]
+};
+const compareBody = document.getElementById('compareBody');
+function renderCompare(which){
+  compareBody.innerHTML='';
+  compareData[which].forEach(row=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML = `<td>${row[0]}</td><td>${row[1]}</td>`;
+    compareBody.appendChild(tr);
+  });
+}
+renderCompare('nephritic');
+document.querySelectorAll('#synToggle button').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('#synToggle button').forEach(b=>b.classList.remove('on'));
+    btn.classList.add('on');
+    renderCompare(btn.dataset.syn);
+  });
+});
+
+/* ================= DIAGRAM 3: GFR SCALE ================= */
+const gfrStages = [
+  {pos:8, label:'ESRD', range:'&lt; 5% of normal GFR', detail:'<b>End-Stage Renal Disease</b> — GFR is less than 5% of normal. Uremic toxin retention, dialysis or transplant typically required.'},
+  {pos:32, label:'RF', range:'&lt; 20% of normal GFR', detail:'<b>Renal failure</b> — GFR reduced to less than 20% of normal.'},
+  {pos:58, label:'RI', range:'20–35% of normal GFR', detail:'<b>Renal insufficiency</b> — GFR decreased to 20–35% of normal.'},
+  {pos:85, label:'DRR', range:'35–50% of normal GFR', detail:'<b>Diminished renal reserve</b> — GFR decreased to 35–50% of normal. Often the earliest, most silent stage.'}
+];
+const gfrScale = document.getElementById('gfrScale');
+const gfrDetail = document.getElementById('gfrDetail');
+document.querySelector('.gfr-track') ? null : null;
+const track = document.createElement('div');
+track.className='gfr-track';
+gfrScale.appendChild(track);
+gfrStages.forEach(stage=>{
+  const m = document.createElement('div');
+  m.className='gfr-stage';
+  m.style.left = stage.pos + '%';
+  m.textContent = stage.label;
+  m.addEventListener('click',()=>{
+    document.querySelectorAll('.gfr-stage').forEach(s=>s.classList.remove('active'));
+    m.classList.add('active');
+    gfrDetail.innerHTML = `${stage.detail} <br><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;">Range: ${stage.range}</span>`;
+  });
+  gfrScale.appendChild(m);
+});
+
+/* ================= DIAGRAM 4: CAUSES OF CRF ================= */
+const causesData = [
+  {name:'Chronic glomerulonephritis', detail:'Ongoing glomerular inflammation slowly scars the filtering units, cutting GFR over time.'},
+  {name:'Chronic infections', detail:'Persistent infection drives inflammation and scarring of renal tissue.'},
+  {name:'Prolonged obstruction', detail:'Long-standing blockage raises pressure upstream and damages nephrons.'},
+  {name:'Nephrotoxic drugs', detail:'Aminoglycoside antibiotics and other nephrotoxins injure the renal tubules directly.'},
+  {name:'Nephrosclerosis', detail:'Atherosclerosis of the renal artery reduces blood supply to the kidney.'},
+  {name:'Diabetic nephropathy', detail:'Chronic hyperglycemia damages glomerular capillaries over years.'},
+  {name:'Polycystic kidney disease', detail:'Genetic disease — expanding cysts progressively destroy normal renal tissue.'}
+];
+const causesGrid = document.getElementById('causesGrid');
+const causesDetail = document.getElementById('causesDetail');
+causesData.forEach(c=>{
+  const chip=document.createElement('div');
+  chip.className='click-chip';
+  chip.textContent=c.name;
+  chip.addEventListener('click',()=>{
+    document.querySelectorAll('#causesGrid .click-chip').forEach(x=>x.classList.remove('active'));
+    chip.classList.add('active');
+    causesDetail.innerHTML = `<b>${c.name}</b> — ${c.detail}`;
+  });
+  causesGrid.appendChild(chip);
+});
+
+/* ================= DIAGRAM 5: CONSEQUENCES OF FALLING GFR ================= */
+const consequenceData = [
+  {name:'Anemia', detail:'↓ GFR → ↓ erythropoietin production by the kidney → anemia.'},
+  {name:'Bone / mineral disease', detail:'↓ GFR → ↓ active vitamin D → hypocalcemia → secondary hyperparathyroidism → hyperphosphatemia.'},
+  {name:'Acidosis &amp; hyperkalemia', detail:'↓ GFR → reduced acid and potassium excretion → acidosis and hyperkalemia.'},
+  {name:'Hypertension &amp; edema', detail:'↓ GFR → reduced salt and water excretion → volume overload → hypertension and edema.'},
+  {name:'Bleeding tendency', detail:'Uremia causes platelet dysfunction → increased bleeding tendency.'}
+];
+const consequenceGrid = document.getElementById('consequenceGrid');
+const consequenceDetail = document.getElementById('consequenceDetail');
+consequenceData.forEach(c=>{
+  const chip=document.createElement('div');
+  chip.className='click-chip';
+  chip.innerHTML=c.name;
+  chip.addEventListener('click',()=>{
+    document.querySelectorAll('#consequenceGrid .click-chip').forEach(x=>x.classList.remove('active'));
+    chip.classList.add('active');
+    consequenceDetail.innerHTML = `<b>${c.name}</b> — ${c.detail}`;
+  });
+  consequenceGrid.appendChild(chip);
+});
+
+/* ================= MINI MAP ================= */
+const mapData = [
+  {title:'Kidney function', body:`<h3>Kidney function</h3><ul>
+    <li>Makes urine — controls fluid &amp; electrolyte balance, eliminates waste.</li>
+    <li>Filters blood, then reabsorbs and secretes ions.</li>
+    <li>Controls Na, K, Cl, CO2 and body fluid balance.</li></ul>`},
+  {title:'UTI', body:`<h3>Urinary tract (bladder) infection</h3><p><b>Etiology:</b> bacterial infection into the urinary tract.</p>
+    <p><b>Signs &amp; symptoms:</b> frequency, dysuria, hematuria, turbid urine, unusual odor, fever.</p>`},
+  {title:'Renal failure types', body:`<h3>Renal failure</h3><p>Defined as loss of function in both kidneys until less than <b>10–20%</b> of normal GFR remains.</p>
+    <p><b>Acute:</b> abrupt onset, potentially reversible.</p><p><b>Chronic:</b> progresses over at least 3 months, can become permanent.</p>`},
+  {title:'Glomerular vs tubular dysfunction', body:`<h3>Pathophysiology of renal failure</h3>
+    <p><b>Glomerular dysfunction:</b> ↓ GFR with retention of substances normally cleared by filtration, including water (e.g. glomerulonephritis).</p>
+    <p><b>Tubular dysfunction:</b> voiding of large volumes of dilute urine (polyuria) of low specific gravity, with loss of electrolytes and nutrients (e.g. aminoglycoside nephrotoxicity).</p>`},
+  {title:'Stages of CRF', body:`<h3>Stages of chronic renal failure</h3><ul>
+    <li>Diminished renal reserve — GFR 35–50% of normal</li>
+    <li>Renal insufficiency — GFR 20–35% of normal</li>
+    <li>Renal failure — GFR &lt; 20% of normal</li>
+    <li>End-stage renal disease — GFR &lt; 5% of normal</li></ul>`},
+  {title:'GFR fallout', body:`<h3>Consequences of a substantial fall in GFR</h3><ul>
+    <li>↓ Erythropoietin → anemia</li>
+    <li>↓ Vitamin D → hypocalcemia, secondary hyperparathyroidism, hyperphosphatemia</li>
+    <li>↓ Acid/K/salt/water excretion → acidosis, hyperkalemia, hypertension, edema</li>
+    <li>Platelet dysfunction → increased bleeding tendencies</li></ul>`},
+  {title:'Nephritic syndrome', body:`<h3>Nephritic syndrome</h3><p>Hematuria + at least one of: oliguria (&lt;400 mL/24h), hypertension with mild-to-moderate proteinuria, uremic symptoms with salt/water retention → edema and hypertension, elevated BUN.</p>
+    <p><b>Mechanism:</b> inflammation and thinning of the GBM with small pores in the podocytes, large enough to let both protein and red blood cells into urine.</p>`},
+  {title:'Nephrotic syndrome', body:`<h3>Nephrotic syndrome</h3><p>Clinically: massive proteinuria (≥3.5 g/day in adults), lipiduria, hypoalbuminemia, generalized edema, hyperlipidemia.</p>
+    <p><b>Primary causes:</b> minimal change disease (most common in children), membranous nephropathy (most common in adults), focal segmental glomerulosclerosis, membranoproliferative glomerulonephritis.</p>
+    <p><b>Secondary causes:</b> DM, amyloidosis, infections (Hepatitis B &amp; C, HIV, syphilis), malignancy (multiple myeloma, Hodgkin lymphoma, solid tumor), drugs (NSAIDs, gold, penicillamine, heavy metals).</p>`},
+  {title:'Filtration barrier', body:`<h3>Glomerular filtration barrier</h3><p>Three structures form it: the fenestrated endothelium, the glomerular basement membrane, and the glomerular epithelium (podocytes) with foot processes and filtration slits.</p>
+    <p>Damage to any of the three can cause proteinuria — albuminuria alone with mild injury, leakage of all plasma proteins with greater injury.</p>
+    <p>Hypoalbuminemia lowers plasma oncotic pressure → more capillary filtration of water throughout the body → edema → activation of the renin–angiotensin system → sodium/water retention that worsens the edema.</p>`},
+  {title:'Metabolic consequences (nephrotic)', body:`<h3>Metabolic consequences of nephrotic syndrome</h3><ul>
+    <li>Infection — loss of complement components and possibly immunoglobulin</li>
+    <li>Hyperlipidemia &amp; atherosclerosis — increased hepatic LDL/VLDL synthesis</li>
+    <li>Hypocalcemia</li>
+    <li>Hypercoagulability — loss of proteins such as antithrombin III</li>
+    <li>Hypovolemia</li></ul>`},
+  {title:'Diabetic nephropathy', body:`<h3>Diabetic nephropathy</h3><p><b>Definition:</b> chronic albuminuria for 3–6 months in at least two of three consecutive urine collections, with a chronic history of diabetes; associated with diabetic retinopathy, hypertension and decreased GFR; no evidence of other kidney/urinary disease.</p>
+    <p><b>Etiology:</b> diabetes mellitus (type I or II).</p>
+    <p><b>Clinical features:</b> early — increased glomerular filtration, protein in urine; later — uremia, hypertension.</p>`},
+  {title:'Henoch–Schönlein purpura', body:`<h3>Henoch–Schönlein purpura (children &amp; adolescents)</h3><p>Often considered a systemic form of IgA nephropathy. A systemic small-vessel vasculitis characterized by deposition of IgA antibody immune complexes throughout the body.</p>
+    <p>Most often presents in children with palpable purpura, abdominal pain and arthritis. When the kidneys are affected, IgA immune complex deposits in the glomerulus.</p>`},
+  {title:'Systemic lupus erythematosus', body:`<h3>Systemic lupus erythematosus (adult)</h3><p>An autoimmune disease that can affect nearly every major system in the body, including the kidneys.</p>
+    <p>Autoantibodies produced in SLE form immune complexes that deposit along the glomerular basement membrane and cause glomerular inflammation, leading to nephrotic syndrome.</p>`},
+  {title:'Chronic glomerulonephritis', body:`<h3>Chronic glomerulonephritis</h3><p>Nearly all forms of acute glomerulonephritis tend to progress to chronic glomerulonephritis, characterized by irreversible, progressive glomerular and tubulointerstitial fibrosis.</p>
+    <p>It can progress to a reduced GFR and retention of uremic toxins; if untreated, it can lead to chronic kidney disease, end-stage renal disease, and cardiovascular disease.</p>`},
+  {title:'Polycystic kidney disease', body:`<h3>Polycystic kidney disease</h3><p><b>Etiology:</b> genetic.</p><p><b>Clinical features:</b> enlarged, cystic kidneys, hypertension, UTI, dilute urine, pain, hematuria.</p>`}
+];
+const mapGrid = document.getElementById('mapGrid');
+const mapDisplay = document.getElementById('mapDisplay');
+mapData.forEach(item=>{
+  const node = document.createElement('div');
+  node.className='map-node';
+  node.textContent = item.title;
+  node.addEventListener('click',()=>{
+    document.querySelectorAll('.map-node').forEach(n=>n.classList.remove('active'));
+    node.classList.add('active');
+    mapDisplay.innerHTML = item.body;
+  });
+  mapGrid.appendChild(node);
+});
+
+/* ================= FLASHCARDS ================= */
+const flashLevels = {"easy": [["What is the main function of the urinary system?", "To make urine, controlling the body's fluid and electrolyte balance and eliminating waste products."], ["Besides filtering blood, what two other processes do the kidneys perform on ions?", "Reabsorption and secretion."], ["Which four electrolytes/substances do the kidneys control along with fluid balance?", "Sodium (Na), potassium (K), chloride (Cl), and CO2."], ["What structure connects each kidney to the bladder?", "The ureter."], ["What is the triangular area at the base of the bladder called?", "The trigone."], ["Where do the ureters open into the bladder?", "At the ureteral orifices."], ["Which sphincter lies at the bladder neck and is involuntary?", "The internal urethral sphincter."], ["Which sphincter provides voluntary control of urination?", "The external urethral sphincter."], ["What muscular layer surrounds the external urethral sphincter?", "The urogenital diaphragm."], ["What tube carries urine from the bladder out of the body?", "The urethra."], ["What is the etiology of a urinary tract infection (UTI)?", "Bacterial infection into the urinary tract."], ["Name five signs/symptoms of a UTI.", "Frequency, dysuria, hematuria, turbid urine with unusual odor, and fever."], ["How is renal failure defined in terms of GFR?", "A significant loss of renal function in both kidneys, with less than 10–20% of normal GFR remaining."], ["Renal failure occurs in which two forms?", "Acute and chronic."], ["How does acute renal failure begin, and is it reversible?", "It has an abrupt onset and is potentially reversible."], ["Over what minimum time period does chronic renal failure progress?", "At least three months."], ["Name six causes of chronic renal failure listed in the lecture.", "Chronic glomerulonephritis, chronic infections, prolonged renal obstruction, toxic chemicals/toxins/drugs (e.g. aminoglycosides), nephrosclerosis, diabetic nephropathy, and polycystic kidney disease."], ["Which antibiotic class is classically nephrotoxic?", "Aminoglycoside antibiotics."], ["What is nephrosclerosis?", "Atherosclerosis of the renal artery."], ["In renal failure, dysfunction occurs in which two parts of the nephron?", "The glomerulus or the tubules."], ["What is the main function of the glomeruli?", "Filtration."], ["What is the main function of the tubules?", "Reabsorption."], ["What does glomerular dysfunction lead to?", "A fall in GFR with retention of substances normally cleared by filtration, including water."], ["Give an example disease of glomerular dysfunction.", "Glomerulonephritis."], ["What does tubular dysfunction cause?", "Voiding of large volumes of dilute urine (polyuria) of low specific gravity, with loss of electrolytes and nutrients."], ["Give an example of tubular dysfunction.", "Aminoglycoside nephrotoxicity."], ["Into how many stages is chronic renal failure classified?", "Four progressive stages, based on loss of GFR."], ["What GFR range defines “diminished renal reserve”?", "35–50% of normal."], ["What GFR range defines “renal insufficiency”?", "20–35% of normal."], ["What GFR range defines “renal failure” as a CRF stage?", "Less than 20% of normal."], ["What GFR defines end-stage renal disease (ESRD)?", "Less than 5% of normal."], ["Besides BUN and creatinine rise, decreased production of erythropoietin in renal failure causes what?", "Anemia."], ["Decreased production of vitamin D in renal failure causes what three findings?", "Hypocalcemia, secondary hyperparathyroidism, and hyperphosphatemia."], ["Reduced excretion of acid, potassium, salt, and water in renal failure causes what four findings?", "Acidosis, hyperkalemia, hypertension, and edema."], ["What causes increased bleeding tendencies in renal failure?", "Platelet dysfunction."], ["What is the most common origin of most primary and secondary glomerular diseases?", "An immunological origin."], ["Name three non-immunological causes of glomerular disease.", "Metabolic (e.g. diabetes), hemodynamic (e.g. hypertension), and toxic (e.g. drugs, chemicals) causes, plus stress."], ["Name the three glomerular disorders listed in the lecture.", "Acute nephritic syndrome, nephrotic syndrome, and chronic glomerulonephritis."], ["What must be present, together with at least one other finding, to diagnose nephritic syndrome?", "Hematuria."], ["What urine output defines oliguria in nephritic syndrome?", "Less than 400 mL per 24 hours."], ["Besides hematuria and oliguria, what else may nephritic syndrome show?", "Hypertension with mild-to-moderate proteinuria, and elevated BUN."], ["What is characteristically thinned and inflamed in acute nephritic syndrome?", "The glomerular basement membrane."], ["What forms in the podocytes in acute nephritic syndrome, allowing protein and RBCs into urine?", "Small pores."], ["What is the proteinuria threshold defining nephrotic syndrome in adults?", "≥ 3.5 grams per day."], ["Name the five clinical features of nephrotic syndrome.", "Massive proteinuria, lipiduria, hypoalbuminemia, generalized edema, and hyperlipidemia."], ["Which primary (idiopathic) glomerular disease is the most common cause of nephrotic syndrome in children?", "Minimal change disease."], ["Which primary glomerular disease is the most common cause of nephrotic syndrome in adults?", "Membranous nephropathy."], ["Name all four primary (idiopathic) causes of nephrotic syndrome.", "Minimal change disease, membranous nephropathy, focal segmental glomerulosclerosis, and membranoproliferative glomerulonephritis."], ["Name the secondary causes of nephrotic syndrome given in the lecture.", "Diabetes mellitus, amyloidosis, infections (Hepatitis B and C, HIV, syphilis), malignancy (multiple myeloma, Hodgkin lymphoma, solid tumors), and drugs (NSAIDs, gold, penicillamine, heavy metals)."], ["What three structures make up the glomerular filtration barrier?", "The fenestrated endothelium, the glomerular basement membrane, and the glomerular epithelium (podocytes)."], ["In a healthy person, what percentage of plasma albumin normally crosses the filtration barrier?", "Less than 0.1%."], ["What are the gaps between podocyte foot processes called?", "Filtration slits."], ["What lowers plasma oncotic pressure in nephrotic syndrome, causing edema?", "Hypoalbuminemia."], ["What system is activated by edema in nephrotic syndrome, worsening it further?", "The renin–angiotensin system."], ["Why does interstitial nephritis not cause nephrotic syndrome?", "Because it affects the tubules and interstitium, not the glomeruli."], ["What is lost in the urine causing increased infection risk in nephrotic syndrome?", "Complement components and possibly immunoglobulin."], ["What is lost in the urine causing hypercoagulability in nephrotic syndrome?", "Antithrombin III."], ["Name the five metabolic consequences of nephrotic syndrome.", "Infection, hyperlipidemia/atherosclerosis, hypocalcemia, hypercoagulability, and hypovolemia."], ["Over what time frame must chronic albuminuria be present to define diabetic nephropathy?", "3 to 6 months, in at least two of three consecutive urine collections."], ["What is diabetic nephropathy associated with?", "Diabetic retinopathy, hypertension, and decreased GFR."]], "medium": [["Why do the kidneys' filtration, reabsorption, and secretion functions matter for the whole body, not just urine formation?", "Because through these processes the kidneys control the body's fluid and electrolyte balance (Na, K, Cl, CO2), not merely eliminate waste."], ["A patient's urine output falls to 300 mL/24h with hematuria — what syndrome does this suggest and why?", "Nephritic syndrome, because oliguria (<400 mL/24h) plus hematuria are its defining features."], ["Why is acute renal failure classified as “potentially reversible” while chronic renal failure is not?", "Because acute renal failure has an abrupt onset with a chance of recovery, whereas chronic renal failure results from progressive, ongoing kidney damage over months."], ["Explain why aminoglycoside antibiotics are grouped under causes of chronic renal failure.", "Because their nephrotoxicity mainly damages the renal tubules, which if prolonged or severe can progress to chronic renal failure."], ["How does glomerular dysfunction differ physiologically from tubular dysfunction in terms of water handling?", "Glomerular dysfunction reduces GFR and retains water and filtered substances, whereas tubular dysfunction impairs reabsorption, causing loss of large volumes of dilute urine (polyuria) instead of retention."], ["Why does a patient with tubular dysfunction from aminoglycoside toxicity produce polyuria rather than oliguria?", "Because the tubules' main function of reabsorption is impaired, so filtered water, electrolytes, and nutrients are voided rather than reabsorbed, producing large volumes of dilute, low-specific-gravity urine."], ["A patient's GFR is 30% of normal — which stage of chronic renal failure is this, and what is it called?", "Renal insufficiency (GFR 20–35% of normal)."], ["Rank the four stages of chronic renal failure from least to most severe by GFR loss.", "Diminished renal reserve (35–50%) → Renal insufficiency (20–35%) → Renal failure (<20%) → End-stage renal disease (<5%)."], ["Why does chronic renal failure cause anemia?", "Because the diseased kidneys produce less erythropoietin, which normally stimulates red blood cell production."], ["Why does chronic renal failure cause secondary hyperparathyroidism?", "Falling GFR reduces renal vitamin D production, causing hypocalcemia, which in turn stimulates the parathyroid glands to secrete more PTH."], ["Why does chronic renal failure lead to both hypertension and edema at the same time?", "Because reduced excretion of salt and water causes fluid retention, raising blood pressure and producing edema together."], ["Why are patients with chronic renal failure prone to bleeding despite a normal platelet count?", "Because uremia causes platelet dysfunction (a qualitative defect), not a reduction in platelet numbers."], ["A patient has nephrotic-range proteinuria caused by long-standing hypertension rather than an immune process — how does this fit the lecture's classification of glomerular disease causes?", "It is a non-immunological (hemodynamic) cause of glomerular disease, distinct from the immunological origin of most primary/secondary glomerular diseases."], ["Why does the presence of RBC casts point toward nephritic rather than nephrotic syndrome?", "Because nephritic syndrome features inflammatory glomerular injury (RBC and protein casts, non-selective proteinuria), while nephrotic syndrome's sediment shows mainly protein casts and lipiduria without RBC casts."], ["Explain the sequence by which thinning of the GBM and podocyte pore formation lead to both proteinuria and hematuria in acute nephritic syndrome.", "Inflammation thins the GBM and creates small pores in the podocytes; these pores enlarge enough to let both plasma proteins and red blood cells cross into the urine."], ["Why is nephrotic syndrome defined by a proteinuria cutoff (≥ 3.5 g/day) rather than simply “proteinuria present”?", "Because it distinguishes the massive protein loss characteristic of severe podocyte/GBM injury from milder proteinuria seen in other conditions like nephritic syndrome."], ["Why does minimal change disease typically present without significant hematuria despite heavy proteinuria?", "Because it causes a subtle podocyte foot-process injury without the endothelial/GBM inflammatory damage that produces hematuria, so protein leaks but red cells largely do not."], ["Why is membranous nephropathy considered the adult counterpart of minimal change disease in children?", "Both are primary (idiopathic) causes of nephrotic syndrome, but membranous nephropathy is the most common cause in adults while minimal change disease is most common in children."], ["If a patient with nephrotic syndrome also has a history of multiple myeloma, how would you classify the cause?", "As a secondary cause of nephrotic syndrome, since malignancy (multiple myeloma) is listed among the secondary causes."], ["Why can chronic NSAID use lead to nephrotic syndrome?", "Because drugs, including NSAIDs, are listed as a secondary cause of nephrotic syndrome through glomerular injury."], ["Explain why, in health, almost no albumin appears in urine despite blood constantly being filtered.", "Because the three-layered glomerular filtration barrier (fenestrated endothelium, GBM, podocyte filtration slits) normally restricts more than 99.9% of plasma albumin from crossing."], ["What is the functional consequence if only the podocyte foot processes are damaged, without endothelial or GBM injury?", "Albuminuria may occur alone (selective proteinuria), reflecting a milder, more selective barrier defect."], ["What happens to the type of protein lost in the urine as glomerular injury becomes more severe?", "With greater injury, leakage progresses from albumin alone to all plasma proteins (non-selective proteinuria)."], ["Trace the physiological chain from hypoalbuminemia to worsening edema in nephrotic syndrome.", "Hypoalbuminemia lowers plasma oncotic pressure → causes greater trans-capillary filtration of water into tissues (edema) → the resulting fall in effective circulating volume activates the renin–angiotensin system → this retains sodium and water → which further aggravates the edema."], ["Why does activation of the renin–angiotensin system worsen, rather than relieve, the edema of nephrotic syndrome?", "Because it promotes sodium and water retention, adding more fluid to a body already leaking protein and losing oncotic pressure, compounding fluid accumulation."], ["Why is interstitial nephritis specifically excluded as a cause of nephrotic syndrome despite being a kidney disease?", "Because nephrotic syndrome requires glomerular injury as an essential feature, and interstitial nephritis primarily damages the tubules and interstitium, sparing the glomeruli."], ["Explain why nephrotic syndrome patients are more prone to infections.", "Loss of complement components and possibly immunoglobulins in the urine impairs the immune defenses these proteins normally provide."], ["Why does nephrotic syndrome cause hyperlipidemia even though the patient is losing protein, not gaining it?", "Hypoalbuminemia stimulates the liver to increase synthesis of proteins generally, including low- and very-low-density lipoproteins that carry cholesterol and triglycerides, raising blood lipid levels."], ["Why are nephrotic syndrome patients at increased risk of thrombosis?", "They lose natural anticoagulant proteins such as antithrombin III in the urine, creating a hypercoagulable state."], ["List, in the correct causal order, how nephrotic syndrome can lead from proteinuria to both edema and thrombosis.", "Glomerular injury → proteinuria → hypoalbuminemia → (a) reduced oncotic pressure → edema, and (b) loss of antithrombin III → hypercoagulability/thrombosis."], ["Why might a nephrotic patient paradoxically be both edematous and intravascularly volume-depleted (hypovolemic)?", "Because fluid leaks out of the vasculature into tissues due to low oncotic pressure (edema), while the intravascular compartment itself can become volume-depleted — one of the listed metabolic consequences (hypovolemia)."], ["Why must a diagnosis of diabetic nephropathy exclude other kidney or urinary diseases?", "Because the definition specifically requires chronic albuminuria with a diabetes history “without presence of clinical or laboratory evidence of other kidney or urinary system diseases,” attributing the albuminuria specifically to diabetes."], ["Why does diabetic nephropathy initially show increased glomerular filtration rather than decreased GFR?", "Because in the early stage, diabetes causes glomerular hyperfiltration together with protein leakage, before GFR eventually declines and uremia/hypertension develop later."], ["Why is diabetic retinopathy relevant to diagnosing diabetic nephropathy?", "Because diabetic nephropathy is associated with diabetic retinopathy, hypertension, and decreased GFR, and its presence supports a diabetic microvascular cause for the kidney findings."], ["Explain why Henoch–Schönlein purpura is often called a “systemic form of IgA nephropathy.”", "Because both conditions share the same underlying mechanism — IgA immune complex deposition — but HSP deposits IgA complexes in multiple organs/vessels systemically (skin, gut, joints, kidney), not just the glomerulus."], ["Why does Henoch–Schönlein purpura cause abdominal pain and arthritis in addition to kidney findings?", "Because it is a systemic small-vessel vasculitis with IgA immune complex deposition in key areas throughout the body, not confined to the kidney, producing purpura, gut, and joint involvement as well."], ["Why does lupus nephritis in SLE produce a nephrotic pattern of injury?", "Because autoantibody immune complexes deposit along the glomerular basement membrane, causing glomerular inflammation that damages the filtration barrier, leading to nephrotic syndrome."], ["Why might chronic glomerulonephritis be considered the “end pathway” of many glomerular diseases?", "Because nearly all forms of acute glomerulonephritis have a tendency to progress toward chronic glomerulonephritis if the underlying injury persists."], ["What two types of fibrosis characterize chronic glomerulonephritis, and why does this make it irreversible?", "Glomerular and tubulointerstitial fibrosis; because fibrosis represents permanent scarring rather than reversible inflammation, the damage cannot be undone."], ["What is the ultimate clinical trajectory of untreated chronic glomerulonephritis?", "Progressive fall in GFR with retention of uremic toxins, leading to chronic kidney disease, end-stage renal disease, and cardiovascular disease."], ["Why does polycystic kidney disease cause both hypertension and dilute urine?", "The enlarging cysts compress normal renal tissue and activate pressor mechanisms such as the renin–angiotensin system (causing hypertension) while destroying nephron/tubular concentrating capacity (causing dilute urine)."], ["A patient has enlarged kidneys, recurrent UTIs, flank pain, and hematuria — what genetic disease fits this picture?", "Polycystic kidney disease."], ["Compare the immune mechanism of SLE nephritis with that of Henoch–Schönlein purpura.", "Both involve immune complex deposition in/along the glomerulus, but SLE complexes are autoantibody-derived and can affect nearly any organ system, while HSP complexes are IgA-based and classically produce the purpura–abdominal pain–arthritis triad."], ["Why does the lecture separate “glomerular” from “tubular” causes when discussing nephrotoxicity?", "Because the clinical picture differs sharply — glomerular damage causes retention (fall in GFR), while tubular damage causes wasting (polyuria, electrolyte and nutrient loss) — so identifying which compartment is injured guides diagnosis."], ["Why would a patient with nephrotic syndrome have both hypercoagulability and edema despite very different underlying mechanisms?", "Both stem from the same root cause (heavy proteinuria/hypoalbuminemia) but through different lost proteins: loss of albumin lowers oncotic pressure (edema), while loss of antithrombin III removes a natural anticoagulant (hypercoagulability)."], ["Explain why elevated BUN in nephritic syndrome reflects decreased GFR rather than increased protein intake.", "Because glomerular inflammation reduces GFR, impairing clearance of nitrogenous waste (urea), so BUN rises from reduced excretion, not increased production."], ["Why does the lecture state that “in all cases, injury to glomeruli is an essential feature” of nephrotic syndrome?", "Because nephrotic syndrome results from increased glomerular capillary wall permeability; without glomerular injury, the massive proteinuria that defines the syndrome cannot occur."], ["Why is minimal change disease's proteinuria often described as more “selective” than that of more advanced glomerular diseases?", "Because with milder injury (foot process effacement without significant GBM/endothelial damage), mainly albumin leaks through, whereas greater injury allows leakage of larger, non-selective plasma proteins."], ["How do the four stages of chronic renal failure relate anemia and bone disease severity to GFR?", "As GFR falls progressively through the four stages, erythropoietin and vitamin D production decline further, so anemia and hypocalcemia/secondary hyperparathyroidism typically worsen with advancing stage."], ["Why might a clinician suspect diabetic nephropathy over primary glomerulonephritis in a diabetic patient with proteinuria and retinopathy?", "Because diabetic nephropathy specifically requires a chronic diabetes history with associated diabetic retinopathy, hypertension, and declining GFR, without evidence of another primary kidney disease."]], "hard": [["A 6-year-old presents with generalized edema, urine protein of 4 g/day, serum albumin 2.0 g/dL, and cholesterol 320 mg/dL, but no hematuria or hypertension. Using the lecture's criteria, is this nephritic or nephrotic syndrome, and which primary cause is most likely given the age?", "Nephrotic syndrome (proteinuria ≥ 3.5 g/day, hypoalbuminemia, hyperlipidemia, edema, no significant hematuria/HTN); minimal change disease is the most likely cause, being the most common in children."], ["A 45-year-old presents with proteinuria of 5 g/day, hypoalbuminemia, and edema, with no diabetes, infection, or malignancy identified. Which primary glomerular disease is statistically most likely, and why?", "Membranous nephropathy, because it is stated as the most common cause of nephrotic syndrome in adults among the idiopathic (primary) causes."], ["Explain, step by step, how an inciting injury to the glomerular filtration barrier can ultimately result in both hyperlipidemia and increased infection risk in the same patient.", "Injury increases glomerular permeability → protein (albumin, complement, immunoglobulin) leaks into urine → hypoalbuminemia stimulates increased hepatic synthesis of proteins including LDL/VLDL carrying cholesterol and triglycerides → hyperlipidemia; simultaneously, urinary loss of complement and immunoglobulins weakens host defense → increased infection risk. Both trace back to the same barrier injury and urinary protein loss."], ["A patient with long-standing type 2 diabetes has albuminuria on two of three urine collections over four months, diabetic retinopathy, hypertension, and a declining GFR, with no other identifiable renal disease. Apply the lecture's definition to classify this presentation.", "This meets the definition of diabetic nephropathy: chronic albuminuria (≥3 months, ≥2 of 3 collections), associated diabetic retinopathy, hypertension, and decreased GFR, with no evidence of other kidney/urinary disease."], ["Contrast the mechanism by which SLE and Henoch–Schönlein purpura both produce glomerular disease, and explain why one classically also produces a systemic triad.", "Both are immune-complex-mediated: SLE autoantibodies deposit along the GBM causing glomerular inflammation and nephrotic syndrome; HSP involves IgA immune complexes deposited systemically in small vessels (skin, gut, joints, glomerulus), so HSP is additionally defined by its purpura, abdominal pain, and arthritis triad, reflecting its broader systemic small-vessel vasculitis."], ["A patient in stage “renal insufficiency” (GFR 25% of normal) is evaluated. Predict which abnormalities are already likely emerging, and which are more likely only in later stages.", "At 20–35% GFR, expect early emergence of mild anemia (↓erythropoietin) and hypocalcemia (↓vitamin D); more severe findings such as marked acidosis, hyperkalemia, and uremic bleeding tendency are more typical of the later “renal failure” (<20%) and “ESRD” (<5%) stages."], ["Explain why a drug causing isolated tubular toxicity (e.g. aminoglycosides) would not be expected to cause nephrotic-range proteinuria, even though it can cause chronic renal failure.", "Because nephrotic syndrome requires glomerular injury (damage to the endothelium, GBM, or podocytes); tubular toxicity impairs reabsorption, producing polyuria and electrolyte/nutrient wasting rather than the barrier breakdown needed for heavy proteinuria, even though cumulative tubular damage can still progress to chronic renal failure through a different mechanism."], ["A patient with nephrotic syndrome develops a deep vein thrombosis. Explain the specific molecular deficiency responsible, and why the same underlying process also explains this patient's edema through a different plasma protein.", "The DVT results from urinary loss of antithrombin III, causing hypercoagulability. The same increased glomerular permeability also causes loss of albumin, lowering plasma oncotic pressure and producing edema — one barrier defect, two complications from different lost proteins."], ["Compare the compensatory renin–angiotensin activation in nephrotic syndrome edema with the salt/water retention mechanism in chronic renal failure. Are they the same process?", "No. In nephrotic syndrome, low oncotic pressure reduces effective circulating volume, secondarily activating RAAS and worsening edema (a compensatory response). In chronic renal failure, salt and water retention results directly from reduced renal excretory capacity, not from RAAS activation triggered by oncotic changes."], ["A biopsy shows irreversible glomerular and tubulointerstitial fibrosis in a patient with recurrent bouts of acute glomerulonephritis. Predict the expected trajectory if untreated.", "This represents chronic glomerulonephritis; the fibrosis is irreversible and progressive, leading to reduced GFR and retention of uremic toxins, and if untreated will progress to chronic kidney disease, end-stage renal disease, and cardiovascular disease."], ["Explain why acute nephritic syndrome and nephrotic syndrome can theoretically overlap in a single patient, based on the lecture's description of the filtration barrier.", "Both arise from injury to the same three-layered filtration barrier (endothelium, GBM, podocytes); nephritic syndrome results mainly from inflammatory GBM thinning/podocyte pore formation causing hematuria plus variable proteinuria, while nephrotic syndrome results from more severe barrier injury causing massive proteinuria — since both share glomerular injury as the root cause, severe disease can produce a mixed picture."], ["Why does the lecture emphasize that endothelial, GBM, and podocyte damage “may be seen in any one type of nephrotic syndrome”?", "Because different glomerular diseases causing nephrotic syndrome may injure different or multiple components of the filtration barrier simultaneously, meaning the final common pathway (massive proteinuria) can arise from varying combinations of barrier injury."], ["A patient has hepatitis C infection and new-onset nephrotic syndrome. How does this fit the causal framework, and what other secondary-cause categories exist?", "Hepatitis C is an infectious secondary cause of nephrotic syndrome; other secondary categories include metabolic/systemic disease (diabetes, amyloidosis), malignancy (multiple myeloma, Hodgkin lymphoma, solid tumors), and drugs (NSAIDs, gold, penicillamine, heavy metals)."], ["A patient has ↑creatinine/BUN, hematuria, RBC casts, hypertension, and non-selective proteinuria, but no hyperlipidemia or lipiduria. Which syndrome does this represent, and what argues against the alternative?", "Nephritic syndrome; the absence of hyperlipidemia and lipiduria argues against nephrotic syndrome, since these are nephrotic-specific features tied to hepatic lipoprotein overproduction from hypoalbuminemia."], ["Why might a patient with chronic renal failure develop both hypertension and bleeding tendency through different pathophysiologic pathways?", "Hypertension results from reduced excretion of salt and water causing volume expansion, while the bleeding tendency results from platelet dysfunction related to uremia — both are consequences of reduced GFR but act through distinct mechanisms."], ["Explain why diabetic nephropathy's early findings (increased GFR, proteinuria) seem to contradict the general principle that glomerular dysfunction lowers GFR.", "Diabetic nephropathy initially causes glomerular hyperfiltration alongside early protein leakage, a compensatory/pathologic hemodynamic change distinct from the later stage, where progressive damage eventually causes GFR to fall and uremia/hypertension to develop."], ["A patient with SLE has nephrotic-range proteinuria. Classify SLE's contribution as immunological or non-immunological, and justify.", "Immunological; SLE-mediated glomerular disease results from autoantibody immune complexes depositing along the GBM, consistent with most glomerular diseases having an immunological origin."], ["If a nephrotic patient has both markedly increased protein loss and complement depletion, what clinical risk does this predict, and through what mechanism?", "Increased infection risk, because loss of complement components (and possibly immunoglobulin) in the urine impairs the humoral immune defenses these proteins normally provide."], ["Why is Henoch–Schönlein purpura framed as a children/adolescent condition while SLE nephritis is framed as an adult disease, and what do they share mechanistically despite this age difference?", "Despite the age difference, both share an immune-complex-mediated mechanism of glomerular injury (IgA complexes in HSP vs. autoantibody complexes in SLE) that deposit in/along the glomerulus and cause inflammation."], ["A nephrotic patient's labs show low antithrombin III, low complement, low albumin, and high LDL. Match each abnormality to its clinical consequence.", "Low antithrombin III → hypercoagulability; low complement/immunoglobulin → infection risk; low albumin → edema and hypovolemia; high LDL → hyperlipidemia/atherosclerosis."], ["Why does the lecture describe chronic renal failure's four stages as based specifically on “loss of GFR” rather than symptoms alone?", "Because GFR is the most direct, quantifiable measure of overall kidney filtering capacity, and clinical/metabolic consequences progressively worsen in a way that correlates with declining GFR."], ["A patient presents with palpable purpura, abdominal pain, arthritis, and hematuria. What deposits in the glomerulus, and how does this relate to IgA nephropathy?", "Henoch–Schönlein purpura; IgA antibody immune complexes deposit in the glomerulus; HSP is considered a systemic form of IgA nephropathy because both share IgA immune complex deposition, but HSP additionally involves systemic small-vessel vasculitis in skin, gut, and joints."], ["Explain why “stress” is listed alongside metabolic, hemodynamic, and toxic causes of glomerular disease, either alone or combined with immunological mechanisms.", "This reflects that non-immunological physiological factors, including stress, can contribute to or amplify glomerular injury either independently or by interacting with underlying immunological mechanisms."], ["A patient has polycystic kidney disease. Explain why this patient is likely to have both hypertension and difficulty concentrating urine, linking each finding to the structural process.", "Progressive cyst enlargement compresses and destroys normal nephron tissue; destruction of tubular architecture impairs concentrating ability (dilute urine), while cyst-related compression/ischemia activates pressor mechanisms, producing hypertension — both trace back to the same cystic destruction of renal parenchyma."], ["Does the four-stage CRF classification apply to acute or chronic renal failure, and why does that matter clinically?", "It applies to chronic renal failure, since it describes progressive, ongoing GFR decline over time; this matters because acute renal failure, being abrupt and potentially reversible, is not expected to follow this same gradual staged progression."], ["A patient has nephrotic syndrome from amyloidosis. Explain why this is classified as secondary rather than primary, and name two other categories in the same classification.", "It is secondary because the glomerular damage results from an underlying systemic disease process rather than an idiopathic primary lesion; other secondary categories include infections (Hepatitis B/C, HIV, syphilis) and malignancy (multiple myeloma, Hodgkin lymphoma, solid tumors)."], ["Explain, mechanistically, why loss of complement in nephrotic urine specifically increases infection risk, distinguishing this from antithrombin III loss.", "Complement proteins participate in opsonization and immune defense against pathogens, so their loss weakens infection resistance; this is distinct from antithrombin III, which inhibits clot formation — its loss instead predisposes to thrombosis, not infection."], ["A patient has interstitial nephritis with normal glomeruli but polyuria and mild renal impairment, without proteinuria. Explain why this fits the lecture's teaching.", "This is consistent because interstitial nephritis affects the tubules and interstitium (impairing reabsorption, causing polyuria) rather than the glomeruli, and since glomerular injury is essential for nephrotic syndrome, the absence of proteinuria is expected."], ["Trace the full pathophysiologic cascade from an initial immune-complex glomerular injury (as in SLE) to the eventual development of chronic kidney disease if the process persists.", "Autoantibody immune complexes deposit along the GBM → glomerular inflammation → nephrotic syndrome → if persistent, progression toward chronic glomerulonephritis with irreversible fibrosis → reduced GFR with uremic toxin retention → chronic kidney disease, end-stage renal disease, and cardiovascular disease."], ["Why does the lecture distinguish “albuminuria alone” from “leakage of all plasma proteins” as two possible outcomes of glomerular injury?", "This implies a spectrum of severity: milder injury may selectively permit only albumin to cross, while more severe injury breaks down the barrier's selectivity, allowing non-selective protein loss — the pattern of proteinuria can reflect the degree of barrier damage."], ["A 30-year-old with SLE develops nephrotic syndrome. Six months later, biopsy shows irreversible glomerular and tubulointerstitial fibrosis. What has this patient progressed to, and what is the likely long-term outcome if untreated?", "The patient has progressed to chronic glomerulonephritis; if untreated, the likely outcome is progression to chronic kidney disease, end-stage renal disease, and cardiovascular disease."], ["Explain why hyperphosphatemia and hypocalcemia occur together in chronic renal failure rather than independently.", "Both stem from the same cause: decreased renal vitamin D production reduces intestinal calcium absorption (hypocalcemia), while declining GFR reduces phosphate excretion (hyperphosphatemia); hypocalcemia further stimulates secondary hyperparathyroidism."], ["A patient with membranoproliferative glomerulonephritis (MPGN) has nephrotic-range proteinuria. Is MPGN primary or secondary, and what other three conditions share its classification?", "Primary (idiopathic); it shares this classification with minimal change disease, membranous nephropathy, and focal segmental glomerulosclerosis."], ["Why would a clinician be cautious about attributing a diabetic patient's proteinuria to diabetic nephropathy if albuminuria has only been documented once, over two weeks, without retinopathy or hypertension?", "Because the definition requires chronic albuminuria for 3–6 months in at least two of three consecutive urine collections, together with associated retinopathy, hypertension, and decreased GFR; a single measurement over two weeks without these does not meet the diagnostic criteria."], ["Explain the physiological link between activation of the renin–angiotensin system in nephrotic syndrome and the metabolic consequence of “hypovolemia” listed separately.", "Hypoalbuminemia causes fluid to shift into tissues (edema), reducing effective intravascular volume (hypovolemia); this perceived volume depletion triggers RAAS, which retains sodium and water — but because the oncotic defect persists, this retained fluid also leaks into tissues, worsening edema rather than correcting the hypovolemia."], ["A biopsy in a heavily proteinuric patient shows normal glomeruli on light microscopy but podocyte foot process effacement on electron microscopy. Which disease does this represent, and in which age group is it most common?", "Minimal change disease; most common in children."], ["Compare the expected BUN/creatinine trend in nephritic syndrome versus early diabetic nephropathy, and explain why.", "In nephritic syndrome, GFR falls and BUN/creatinine rise due to acute glomerular inflammation; in early diabetic nephropathy, GFR is actually increased (hyperfiltration), so BUN/creatinine would not be expected to rise yet, appearing only later as the disease progresses."], ["Is it a contradiction that hypertension is listed as both a hemodynamic cause of glomerular disease and a consequence of chronic renal failure?", "No; it reflects a bidirectional relationship: hypertension can be a primary cause of glomerular injury, while separately, renal failure from any cause produces hypertension via reduced salt/water excretion — hypertension can be both cause and effect."], ["If a patient has both hyperlipidemia and hypercoagulability from nephrotic syndrome, explain the combined vascular risk and identify the two distinct proteins responsible.", "Hyperlipidemia (increased hepatic LDL/VLDL synthesis) promotes atherosclerosis, while loss of antithrombin III promotes hypercoagulability/thrombosis — combined risk for both chronic vascular disease and acute thrombotic events from two consequences of the same proteinuric state."], ["Summarize, in causal-chain form, how a single episode of acute nephritic syndrome could theoretically culminate in end-stage renal disease years later.", "Acute GBM thinning and podocyte pore formation (acute nephritic syndrome) → if recurrent/unresolved, evolves into chronic glomerulonephritis with irreversible fibrosis → progressive fibrosis reduces GFR and retains uremic toxins → GFR falls through diminished renal reserve, renal insufficiency, and renal failure → ultimately end-stage renal disease, with accompanying anemia, bone disease, acidosis, and bleeding tendency."]]};
+let fcLevel = 'easy';
+let flashData = flashLevels[fcLevel];
+let fcOrder = flashData.map((_,i)=>i);
+let fcIndex = 0;
+let fcFlipped = false;
+
+const fcFront = document.getElementById('fcFront');
+const fcBack = document.getElementById('fcBack');
+const fcCount = document.getElementById('fcCount');
+const flashcardEl = document.getElementById('flashcard');
+const fcLevelBtns = document.querySelectorAll('[data-fclevel]');
+
+function setFcLevel(level){
+  fcLevel = level;
+  flashData = flashLevels[fcLevel];
+  fcOrder = flashData.map((_,i)=>i);
+  fcIndex = 0;
+  document.getElementById('fcTag').textContent = flashData.length + ' cards';
+  fcLevelBtns.forEach(b=>b.classList.toggle('active', b.dataset.fclevel===fcLevel));
+  renderFlash();
+}
+fcLevelBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>setFcLevel(btn.dataset.fclevel));
+});
+
+function renderFlash(){
+  const item = flashData[fcOrder[fcIndex]];
+  fcFront.textContent = item[0];
+  fcBack.textContent = item[1];
+  fcCount.textContent = `Card ${fcIndex+1} / ${flashData.length}`;
+  flashcardEl.classList.remove('flipped');
+  fcFlipped = false;
+}
+flashcardEl.addEventListener('click',()=>{
+  fcFlipped = !fcFlipped;
+  flashcardEl.classList.toggle('flipped',fcFlipped);
+});
+document.getElementById('fcNext').addEventListener('click',()=>{
+  fcIndex = (fcIndex+1) % flashData.length;
+  renderFlash();
+});
+document.getElementById('fcPrev').addEventListener('click',()=>{
+  fcIndex = (fcIndex-1+flashData.length) % flashData.length;
+  renderFlash();
+});
+document.getElementById('fcShuffle').addEventListener('click',()=>{
+  for(let i=fcOrder.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [fcOrder[i],fcOrder[j]]=[fcOrder[j],fcOrder[i]];
+  }
+  fcIndex=0;
+  renderFlash();
+});
+setFcLevel('easy');
+
+/* ================= QUIZ BANK ================= */
+const quizLevels = {"easy": [{"q": "What is the main function of the urinary system?", "opts": ["To make urine and control fluid/electrolyte balance while eliminating waste", "To produce digestive enzymes", "To synthesize hemoglobin", "To regulate body temperature only"], "correct": 0}, {"q": "Besides filtering blood, kidneys also perform which two processes on ions?", "opts": ["Reabsorption and secretion", "Oxidation and reduction", "Digestion and absorption", "Coagulation and lysis"], "correct": 0}, {"q": "Which electrolytes/gas do the kidneys control along with fluid balance?", "opts": ["Na, K, Cl, CO2", "Ca, Mg, P, Fe", "Glucose, insulin, cortisol", "Hemoglobin, bilirubin, urea only"], "correct": 0}, {"q": "What structure connects each kidney to the urinary bladder?", "opts": ["Ureter", "Urethra", "Renal vein", "Renal artery"], "correct": 0}, {"q": "What is the triangular area at the bladder base called?", "opts": ["Trigone", "Fundus", "Fornix", "Hilum"], "correct": 0}, {"q": "Where do the ureters enter the bladder?", "opts": ["Ureteral orifices", "Internal urethral orifice", "External urethral sphincter", "Urogenital diaphragm"], "correct": 0}, {"q": "Which sphincter is involuntary and located at the bladder neck?", "opts": ["Internal urethral sphincter", "External urethral sphincter", "Pyloric sphincter", "Anal sphincter"], "correct": 0}, {"q": "Which sphincter allows voluntary control of urination?", "opts": ["External urethral sphincter", "Internal urethral sphincter", "Cardiac sphincter", "Ileocecal valve"], "correct": 0}, {"q": "What muscular structure surrounds the external urethral sphincter?", "opts": ["Urogenital diaphragm", "Respiratory diaphragm", "Rectus sheath", "Pelvic peritoneum"], "correct": 0}, {"q": "What tube carries urine from the bladder to outside the body?", "opts": ["Urethra", "Ureter", "Vas deferens", "Fallopian tube"], "correct": 0}, {"q": "What is the etiology of a urinary tract infection (UTI)?", "opts": ["Bacterial infection of the urinary tract", "Viral infection of the kidney", "Fungal infection of the bladder", "Autoimmune bladder disease"], "correct": 0}, {"q": "Which of the following is NOT a listed symptom of UTI?", "opts": ["Massive proteinuria over 3.5 g/day", "Dysuria", "Frequency", "Turbid urine with unusual odor"], "correct": 0}, {"q": "Renal failure is defined as loss of renal function until GFR falls to what range?", "opts": ["10-20% of normal", "60-70% of normal", "90-100% of normal", "40-50% of normal"], "correct": 0}, {"q": "Renal failure may occur in which two forms?", "opts": ["Acute and chronic", "Mild and severe", "Primary and secondary", "Local and systemic"], "correct": 0}, {"q": "Which type of renal failure has an abrupt onset and is potentially reversible?", "opts": ["Acute renal failure", "Chronic renal failure", "End-stage renal disease", "Diminished renal reserve"], "correct": 0}, {"q": "Chronic renal failure progresses over at least how long?", "opts": ["Three months", "Three days", "Three weeks", "Three years"], "correct": 0}, {"q": "Which of the following is NOT listed as a cause of chronic renal failure?", "opts": ["Acute viral hepatitis", "Chronic glomerulonephritis", "Diabetic nephropathy", "Polycystic kidney disease"], "correct": 0}, {"q": "Which antibiotic class is classically nephrotoxic to the renal tubules?", "opts": ["Aminoglycosides", "Penicillins", "Macrolides", "Tetracyclines"], "correct": 0}, {"q": "What is nephrosclerosis?", "opts": ["Atherosclerosis of the renal artery", "Cyst formation in the kidney", "Kidney stone disease", "Bladder wall thickening"], "correct": 0}, {"q": "In renal failure, dysfunction occurs in which two nephron compartments?", "opts": ["Glomerulus and tubules", "Cortex and medulla", "Pelvis and calyx", "Capsule and hilum"], "correct": 0}, {"q": "What is the main function of the glomeruli?", "opts": ["Filtration", "Reabsorption", "Secretion of hormones", "Storage of urine"], "correct": 0}, {"q": "What is the main function of the renal tubules?", "opts": ["Reabsorption", "Filtration", "Excretion of bile", "Production of erythropoietin only"], "correct": 0}, {"q": "Glomerular dysfunction leads to which finding?", "opts": ["Fall in GFR with retention of filtered substances", "Excess dilute urine only", "Increased urine concentration only", "Loss of red blood cells from bone marrow"], "correct": 0}, {"q": "Which disease is given as an example of glomerular dysfunction?", "opts": ["Glomerulonephritis", "Cystitis", "Pyelonephritis of the pelvis only", "Urethritis"], "correct": 0}, {"q": "Tubular dysfunction typically causes what?", "opts": ["Polyuria of dilute, low specific gravity urine", "Complete anuria", "Hyperconcentrated urine", "Hematuria only"], "correct": 0}, {"q": "Which drug/toxin is given as an example causing mainly tubular dysfunction?", "opts": ["Aminoglycosides", "Warfarin", "Insulin", "Digoxin"], "correct": 0}, {"q": "Chronic renal failure is classified into how many progressive stages?", "opts": ["Four", "Two", "Six", "Eight"], "correct": 0}, {"q": "What GFR range defines \"diminished renal reserve\"?", "opts": ["35-50% of normal", "5-10% of normal", "60-80% of normal", "90-100% of normal"], "correct": 0}, {"q": "What GFR range defines \"renal insufficiency\"?", "opts": ["20-35% of normal", "50-70% of normal", "less than 5%", "80-90%"], "correct": 0}, {"q": "The CRF stage termed \"renal failure\" corresponds to a GFR of:", "opts": ["Less than 20% of normal", "50-75% of normal", "35-50% of normal", "more than 90%"], "correct": 0}, {"q": "End-stage renal disease (ESRD) is defined by a GFR of:", "opts": ["Less than 5% of normal", "20-35% of normal", "35-50% of normal", "50-60% of normal"], "correct": 0}, {"q": "Decreased erythropoietin production in renal failure results in:", "opts": ["Anemia", "Polycythemia", "Leukocytosis", "Thrombocytosis"], "correct": 0}, {"q": "Decreased vitamin D production in renal failure results in which combination?", "opts": ["Hypocalcemia, secondary hyperparathyroidism, and hyperphosphatemia", "Hypercalcemia and hypoparathyroidism", "Hyperglycemia and ketoacidosis", "Hyponatremia and hypokalemia"], "correct": 0}, {"q": "Reduced excretion of acid, potassium, salt, and water in renal failure results in:", "opts": ["Acidosis, hyperkalemia, hypertension, and edema", "Alkalosis, hypokalemia, hypotension, and dehydration", "Acidosis, hypokalemia, hypertension only", "Alkalosis, hyperkalemia, hypotension only"], "correct": 0}, {"q": "Increased bleeding tendency in renal failure is mainly caused by:", "opts": ["Platelet dysfunction", "Vitamin K deficiency", "Liver failure", "Excess heparin"], "correct": 0}, {"q": "Most cases of primary and secondary glomerular disease have what type of origin?", "opts": ["Immunological", "Purely genetic", "Purely mechanical", "Purely nutritional"], "correct": 0}, {"q": "Which of the following is listed as a non-immunological cause of glomerular disease?", "opts": ["Diabetes (metabolic)", "Minimal change disease", "IgA nephropathy", "Anti-GBM disease"], "correct": 0}, {"q": "Which three glomerular disorders are listed in the lecture?", "opts": ["Acute nephritic syndrome, nephrotic syndrome, chronic glomerulonephritis", "UTI, renal stones, bladder cancer", "Cystitis, urethritis, prostatitis", "Hydronephrosis, renal cyst, renal infarct"], "correct": 0}, {"q": "Which finding is essential to define nephritic syndrome?", "opts": ["Hematuria", "Lipiduria", "Hyperlipidemia", "Massive proteinuria alone"], "correct": 0}, {"q": "Oliguria in nephritic syndrome is defined as urine output less than:", "opts": ["400 mL/24 hours", "4000 mL/24 hours", "40 mL/24 hours", "1000 mL/24 hours"], "correct": 0}, {"q": "In acute nephritic syndrome, what structural change allows protein and RBCs into urine?", "opts": ["Thinning of the GBM with small pores in the podocytes", "Complete destruction of the nephron", "Total loss of tubular reabsorption", "Bladder wall inflammation"], "correct": 0}, {"q": "What proteinuria threshold defines nephrotic syndrome in adults?", "opts": ["≥ 3.5 g/day", "≥ 0.5 g/day", "≥ 1 g/day", "≥ 10 g/day"], "correct": 0}, {"q": "Which of the following is NOT one of the five clinical features of nephrotic syndrome?", "opts": ["Hyperkalemia", "Massive proteinuria", "Hypoalbuminemia", "Hyperlipidemia"], "correct": 0}, {"q": "Which primary glomerular disease is the most common cause of nephrotic syndrome in children?", "opts": ["Minimal change disease", "Membranous nephropathy", "Focal segmental glomerulosclerosis", "Membranoproliferative glomerulonephritis"], "correct": 0}, {"q": "Which primary glomerular disease is the most common cause of nephrotic syndrome in adults?", "opts": ["Membranous nephropathy", "Minimal change disease", "IgA nephropathy", "Interstitial nephritis"], "correct": 0}, {"q": "Which of the following is a secondary cause of nephrotic syndrome?", "opts": ["Diabetes mellitus", "Minimal change disease", "Focal segmental glomerulosclerosis", "Membranoproliferative glomerulonephritis"], "correct": 0}, {"q": "Which drugs are listed as causes of secondary nephrotic syndrome?", "opts": ["NSAIDs, gold, penicillamine", "Beta blockers, insulin, metformin", "Antihistamines, decongestants", "Statins, diuretics"], "correct": 0}, {"q": "Which three structures make up the glomerular filtration barrier?", "opts": ["Fenestrated endothelium, GBM, podocytes", "Renal pelvis, calyx, ureter", "Proximal tubule, loop of Henle, distal tubule", "Cortex, medulla, papilla"], "correct": 0}, {"q": "In a healthy person, roughly what percentage of plasma albumin crosses the filtration barrier?", "opts": ["Less than 0.1%", "About 10%", "About 25%", "About 50%"], "correct": 0}, {"q": "What are the gaps between podocyte foot processes called?", "opts": ["Filtration slits", "Fenestrae", "Bowman's gaps", "Mesangial pores"], "correct": 0}, {"q": "What lowers plasma oncotic pressure in nephrotic syndrome?", "opts": ["Hypoalbuminemia", "Hyperkalemia", "Hypercalcemia", "Hyperglycemia"], "correct": 0}, {"q": "Which system is activated by edema in nephrotic syndrome, worsening sodium/water retention?", "opts": ["Renin-angiotensin system", "Complement system", "Coagulation cascade", "Sympathetic-only vasodilation"], "correct": 0}, {"q": "Why does interstitial nephritis typically NOT cause nephrotic syndrome?", "opts": ["It spares the glomeruli, affecting the tubules/interstitium", "It only affects the bladder", "It always causes hematuria instead", "It only occurs in children"], "correct": 0}, {"q": "Increased infection risk in nephrotic syndrome is explained by loss of which proteins?", "opts": ["Complement components and immunoglobulin", "Hemoglobin", "Antithrombin III only", "Albumin only"], "correct": 0}, {"q": "What causes the hyperlipidemia seen in nephrotic syndrome?", "opts": ["Increased hepatic synthesis of LDL and VLDL", "Decreased hepatic protein synthesis", "Loss of lipase in urine", "Excess dietary fat"], "correct": 0}, {"q": "Hypercoagulability in nephrotic syndrome is linked to loss of which protein?", "opts": ["Antithrombin III", "Fibrinogen", "Vitamin K", "Erythropoietin"], "correct": 0}, {"q": "Which of the following is NOT one of the five metabolic consequences of nephrotic syndrome listed?", "opts": ["Hypervolemia", "Hypocalcemia", "Hypercoagulability", "Infection"], "correct": 0}, {"q": "Diabetic nephropathy requires chronic albuminuria confirmed over what time frame?", "opts": ["3-6 months, in 2 of 3 collections", "1 week, in a single collection", "24 hours only", "5 years continuously"], "correct": 0}, {"q": "Diabetic nephropathy is classically associated with which combination?", "opts": ["Diabetic retinopathy, hypertension, decreased GFR", "Cataracts only", "Peripheral neuropathy only", "Hyperthyroidism"], "correct": 0}, {"q": "What is the etiology of polycystic kidney disease?", "opts": ["Genetic", "Bacterial infection", "Autoimmune", "Drug-induced"], "correct": 0}], "medium": [{"q": "A patient's urine output is 300 mL/24h with hematuria. Which syndrome does this best fit?", "opts": ["Nephritic syndrome", "Nephrotic syndrome", "Diabetes insipidus", "Interstitial nephritis"], "correct": 0}, {"q": "Why is acute renal failure considered potentially reversible while chronic renal failure is not?", "opts": ["Acute has an abrupt onset with recovery potential; chronic results from progressive damage over months", "Acute always requires dialysis; chronic never does", "Acute only affects children; chronic only affects adults", "There is no real difference between them"], "correct": 0}, {"q": "Why are aminoglycoside antibiotics grouped as a cause of chronic renal failure?", "opts": ["Their nephrotoxicity mainly damages renal tubules, which can progress to CRF", "They cause immune complex deposition in the glomerulus", "They directly destroy the bladder wall", "They cause polycystic kidney disease"], "correct": 0}, {"q": "How does tubular dysfunction differ from glomerular dysfunction in water handling?", "opts": ["Tubular dysfunction causes polyuria from impaired reabsorption; glomerular dysfunction causes retention from reduced filtration", "Both cause identical oliguria", "Tubular dysfunction causes retention; glomerular dysfunction causes polyuria", "Neither affects water handling"], "correct": 0}, {"q": "A patient's GFR is 30% of normal. Which stage of chronic renal failure is this?", "opts": ["Renal insufficiency", "Diminished renal reserve", "Renal failure", "End-stage renal disease"], "correct": 0}, {"q": "Which of the following correctly ranks CRF stages from mildest to most severe?", "opts": ["Diminished renal reserve → Renal insufficiency → Renal failure → ESRD", "ESRD → Renal failure → Renal insufficiency → Diminished renal reserve", "Renal failure → ESRD → Diminished renal reserve → Renal insufficiency", "Renal insufficiency → Diminished renal reserve → ESRD → Renal failure"], "correct": 0}, {"q": "Why does chronic renal failure cause secondary hyperparathyroidism?", "opts": ["Reduced vitamin D causes hypocalcemia, which stimulates PTH secretion", "Excess vitamin D causes hypercalcemia, which suppresses PTH", "Reduced erythropoietin directly stimulates the parathyroid", "Increased phosphate excretion lowers PTH"], "correct": 0}, {"q": "Why are chronic renal failure patients prone to bleeding despite a normal platelet count?", "opts": ["Uremia causes qualitative platelet dysfunction", "Uremia destroys platelets in the bone marrow", "Excess antithrombin III is produced", "Vitamin K is overproduced"], "correct": 0}, {"q": "A patient has nephrotic-range proteinuria from long-standing hypertension. How is this classified?", "opts": ["Non-immunological (hemodynamic) cause", "Immunological cause", "Genetic cause", "Infectious cause"], "correct": 0}, {"q": "RBC casts in urine sediment point toward which syndrome?", "opts": ["Nephritic syndrome", "Nephrotic syndrome", "Diabetic nephropathy only", "Polycystic kidney disease only"], "correct": 0}, {"q": "In acute nephritic syndrome, thinning of the GBM and podocyte pore formation together cause:", "opts": ["Both proteinuria and hematuria", "Hematuria only", "Proteinuria only", "Neither hematuria nor proteinuria"], "correct": 0}, {"q": "Why does nephrotic syndrome use a specific proteinuria cutoff (≥ 3.5 g/day) in its definition?", "opts": ["To distinguish massive protein loss from milder proteinuria in other conditions", "Because it is an arbitrary historical number with no clinical meaning", "Because lower amounts of protein are never pathological", "Because it corresponds exactly to renal failure"], "correct": 0}, {"q": "Why does minimal change disease typically show heavy proteinuria without significant hematuria?", "opts": ["Podocyte foot-process injury without endothelial/GBM inflammatory damage", "Severe endothelial destruction with vasculitis", "Complete loss of the glomerular basement membrane", "Bladder-level inflammation"], "correct": 0}, {"q": "What links minimal change disease in children and membranous nephropathy in adults?", "opts": ["Both are primary (idiopathic) causes of nephrotic syndrome, most common in their age group", "Both are secondary causes linked to malignancy", "Both are caused by diabetes", "Both are caused by bacterial infection"], "correct": 0}, {"q": "A patient with multiple myeloma develops nephrotic syndrome. How is the cause classified?", "opts": ["Secondary", "Primary", "Genetic", "Congenital"], "correct": 0}, {"q": "Chronic NSAID use can cause nephrotic syndrome. Under which classification does this fall?", "opts": ["Secondary (drug-induced)", "Primary (idiopathic)", "Genetic", "Infectious"], "correct": 0}, {"q": "Why does almost no albumin normally appear in urine despite constant blood filtration?", "opts": ["The three-layered filtration barrier restricts more than 99.9% of plasma albumin", "The kidneys reabsorb 100% of filtered albumin in the tubules", "Albumin is too large to ever enter the bloodstream", "The bladder actively destroys filtered albumin"], "correct": 0}, {"q": "If only podocyte foot processes are damaged, without endothelial or GBM injury, what typically results?", "opts": ["Selective albuminuria alone", "Complete anuria", "Massive hematuria without proteinuria", "Loss of all plasma proteins immediately"], "correct": 0}, {"q": "As glomerular injury becomes more severe, urinary protein loss typically progresses from:", "opts": ["Albumin alone to all plasma proteins (non-selective)", "All plasma proteins to albumin alone", "No protein loss to selective loss only", "Protein loss to complete resolution"], "correct": 0}, {"q": "What is the correct causal sequence linking hypoalbuminemia to worsening edema in nephrotic syndrome?", "opts": ["Hypoalbuminemia → ↓oncotic pressure → edema → RAAS activation → Na/water retention → worse edema", "Edema → hypoalbuminemia → increased oncotic pressure → RAAS suppression", "RAAS activation → hypoalbuminemia → edema resolution", "Hyperalbuminemia → increased oncotic pressure → edema"], "correct": 0}, {"q": "Why does RAAS activation worsen rather than relieve nephrotic edema?", "opts": ["It promotes sodium and water retention, adding fluid to a body already leaking protein", "It directly repairs the glomerular filtration barrier", "It reduces hepatic lipoprotein synthesis", "It restores plasma albumin levels"], "correct": 0}, {"q": "Why is interstitial nephritis excluded as a cause of nephrotic syndrome?", "opts": ["It spares the glomeruli, affecting tubules/interstitium, and glomerular injury is essential for nephrotic syndrome", "It always causes severe hematuria", "It only occurs after UTIs", "It causes hyperlipidemia without proteinuria"], "correct": 0}, {"q": "Increased infection risk in nephrotic syndrome results from loss of which substances in urine?", "opts": ["Complement components and immunoglobulins", "Red blood cells and platelets", "Antithrombin III and fibrinogen", "Vitamin D and calcium"], "correct": 0}, {"q": "Why does nephrotic syndrome cause hyperlipidemia despite the patient losing protein overall?", "opts": ["Hypoalbuminemia stimulates increased hepatic synthesis of LDL/VLDL carrying cholesterol and triglycerides", "Loss of albumin directly increases blood cholesterol", "The kidneys begin synthesizing cholesterol", "Fat malabsorption in the gut increases lipid levels"], "correct": 0}, {"q": "Why are nephrotic patients at increased thrombotic risk?", "opts": ["Loss of antithrombin III (a natural anticoagulant) in urine", "Excess vitamin K production", "Increased platelet destruction", "Loss of fibrinogen in urine"], "correct": 0}, {"q": "Which sequence correctly links proteinuria to both edema and hypercoagulability in nephrotic syndrome?", "opts": ["Proteinuria → hypoalbuminemia → (a) ↓oncotic pressure → edema, (b) ↓antithrombin III → hypercoagulability", "Proteinuria → hyperalbuminemia → edema and hypocoagulability", "Edema → proteinuria → hypercoagulability → hyperalbuminemia", "Hypercoagulability → proteinuria → hyperalbuminemia"], "correct": 0}, {"q": "Why can a nephrotic patient be both edematous and intravascularly volume-depleted?", "opts": ["Fluid leaks from the vasculature into tissues due to low oncotic pressure, while intravascular volume itself drops", "Edema always increases intravascular volume proportionally", "Hypovolemia and edema never occur together", "Hypervolemia causes edema exclusively"], "correct": 0}, {"q": "Why must other kidney/urinary diseases be excluded to diagnose diabetic nephropathy?", "opts": ["Because the definition requires attributing chronic albuminuria specifically to diabetes, without other explanations", "Because diabetes never causes kidney disease", "Because other kidney diseases always coexist with diabetes", "Because the definition does not depend on excluding other causes"], "correct": 0}, {"q": "Why does diabetic nephropathy initially show increased, not decreased, GFR?", "opts": ["Early diabetic glomerular hyperfiltration occurs before GFR eventually declines", "Diabetes always improves renal blood flow permanently", "GFR increases only in the very late stage", "GFR is unaffected by diabetes at any stage"], "correct": 0}, {"q": "Why is diabetic retinopathy relevant when diagnosing diabetic nephropathy?", "opts": ["Its presence supports a diabetic microvascular cause for the kidney findings", "It is unrelated to renal disease", "It excludes the diagnosis of diabetic nephropathy", "It confirms the diagnosis of nephrotic syndrome instead"], "correct": 0}, {"q": "Why is Henoch-Schönlein purpura called a \"systemic form of IgA nephropathy\"?", "opts": ["Both share IgA immune complex deposition, but HSP deposits complexes systemically in multiple organs", "They share no mechanistic similarity", "HSP is caused by IgG rather than IgA", "IgA nephropathy only affects children while HSP only affects adults"], "correct": 0}, {"q": "Why does Henoch-Schönlein purpura cause abdominal pain and arthritis in addition to renal findings?", "opts": ["It is a systemic small-vessel vasculitis with IgA complex deposition throughout the body, not just the kidney", "It only affects the kidney and these are coincidental symptoms", "It is caused by a localized bladder infection", "It only affects the respiratory system"], "correct": 0}, {"q": "Why does lupus nephritis in SLE typically produce a nephrotic pattern of injury?", "opts": ["Autoantibody immune complexes deposit along the GBM, causing glomerular inflammation", "Bacteria directly invade the glomerulus", "Genetic cyst formation compresses the nephrons", "Aminoglycoside toxicity damages the tubules"], "correct": 0}, {"q": "Why is chronic glomerulonephritis considered an \"end pathway\" of many glomerular diseases?", "opts": ["Nearly all forms of acute glomerulonephritis tend to progress toward it", "It is always the first stage of any renal disease", "It only results from genetic causes", "It cannot result from immune complex disease"], "correct": 0}, {"q": "What two types of fibrosis characterize chronic glomerulonephritis?", "opts": ["Glomerular and tubulointerstitial fibrosis", "Hepatic and splenic fibrosis", "Cardiac and pulmonary fibrosis", "Bone marrow and lymphatic fibrosis"], "correct": 0}, {"q": "What is the ultimate outcome of untreated chronic glomerulonephritis?", "opts": ["CKD, ESRD, and cardiovascular disease", "Complete spontaneous recovery", "Isolated bladder dysfunction only", "Kidney stones only"], "correct": 0}, {"q": "Why does polycystic kidney disease cause both hypertension and dilute urine?", "opts": ["Cysts compress normal tissue while destroying tubular concentrating capacity", "Cysts only affect the bladder, not the kidney", "Cysts increase erythropoietin production, causing hypertension", "Cysts have no effect on blood pressure or urine concentration"], "correct": 0}, {"q": "A patient has enlarged kidneys, recurrent UTIs, flank pain, and hematuria. Which genetic disease fits this picture?", "opts": ["Polycystic kidney disease", "Minimal change disease", "Diabetic nephropathy", "Henoch-Schönlein purpura"], "correct": 0}, {"q": "How do the immune mechanisms of SLE nephritis and HSP differ?", "opts": ["SLE involves autoantibody complexes affecting nearly any organ; HSP involves IgA complexes with a purpura-abdominal pain-arthritis triad", "They are mechanistically identical in every respect", "SLE only affects the skin; HSP only affects the kidney", "Neither involves immune complex deposition"], "correct": 0}, {"q": "Why does the lecture separate glomerular from tubular causes of nephrotoxicity?", "opts": ["Glomerular damage causes retention (fall in GFR); tubular damage causes wasting (polyuria, electrolyte loss)", "Both cause an identical clinical picture", "Glomerular damage always causes polyuria; tubular damage always causes oliguria", "There is no clinical difference between them"], "correct": 0}, {"q": "Why can nephrotic syndrome cause both hypercoagulability and edema through different mechanisms?", "opts": ["Loss of albumin lowers oncotic pressure (edema); loss of antithrombin III removes a natural anticoagulant (hypercoagulability)", "Both result from the exact same lost protein", "Hypercoagulability is unrelated to proteinuria", "Edema is caused by antithrombin III loss"], "correct": 0}, {"q": "Elevated BUN in nephritic syndrome reflects:", "opts": ["Decreased GFR impairing clearance of nitrogenous waste", "Increased dietary protein intake only", "Increased hepatic urea production only", "Increased tubular reabsorption of urea"], "correct": 0}, {"q": "Why is glomerular injury described as \"essential\" for nephrotic syndrome?", "opts": ["Because the syndrome results from increased glomerular capillary wall permeability", "Because tubular injury alone always causes massive proteinuria", "Because bladder inflammation is the primary cause", "Because glomerular injury is optional in most cases"], "correct": 0}, {"q": "Why is minimal change disease's proteinuria often more \"selective\" than in advanced glomerular disease?", "opts": ["Milder injury allows mainly albumin to leak, while greater injury permits non-selective large protein loss", "Selective proteinuria means no protein is lost at all", "Selective proteinuria only occurs with severe GBM destruction", "There is no difference in selectivity between mild and severe disease"], "correct": 0}, {"q": "How do declining GFR stages relate to anemia and bone disease severity in CRF?", "opts": ["As GFR falls through progressive stages, erythropoietin and vitamin D production decline further, worsening anemia and bone disease", "Anemia and bone disease improve as GFR falls", "GFR has no relationship to erythropoietin or vitamin D", "Bone disease only appears in acute renal failure"], "correct": 0}, {"q": "Why might a diabetic patient with proteinuria and retinopathy be suspected of having diabetic nephropathy over primary glomerulonephritis?", "opts": ["Diabetic nephropathy specifically requires a chronic diabetes history with retinopathy, hypertension, and declining GFR", "Retinopathy has no diagnostic relevance to kidney disease", "Primary glomerulonephritis always coexists with diabetic retinopathy", "Diabetic nephropathy excludes any history of hypertension"], "correct": 0}, {"q": "Why does the lecture imply hypertension can be both a cause and a consequence of kidney disease?", "opts": ["Hypertension can be a hemodynamic cause of glomerular injury, and separately, renal failure causes hypertension via salt/water retention", "Hypertension is never related to kidney disease", "Hypertension only ever causes kidney disease, never the reverse", "Kidney disease only ever causes hypotension"], "correct": 0}, {"q": "Why are nephrotic patients at combined risk for both atherosclerotic and thrombotic events?", "opts": ["Hyperlipidemia promotes atherosclerosis while antithrombin III loss promotes thrombosis — two distinct consequences of proteinuria", "Both risks come from the exact same molecule", "Atherosclerosis and thrombosis are unrelated to nephrotic syndrome", "Only thrombotic risk is increased in nephrotic syndrome"], "correct": 0}, {"q": "Which best explains why aminoglycoside nephrotoxicity does not typically cause nephrotic-range proteinuria?", "opts": ["It damages tubules (reabsorption), not the glomerular filtration barrier needed for heavy proteinuria", "It always destroys the glomeruli completely", "It causes immune complex deposition in the GBM", "It is a common cause of nephrotic syndrome in children"], "correct": 0}, {"q": "In diabetic nephropathy, what change is typically seen in the early stage compared to the late stage?", "opts": ["Early: increased glomerular filtration and proteinuria; Late: uremia and hypertension", "Early: uremia and hypertension; Late: increased GFR", "Both stages show identical GFR and clinical findings", "Early stage always shows ESRD"], "correct": 0}], "hard": [{"q": "A 6-year-old has generalized edema, urine protein 4 g/day, serum albumin 2.0 g/dL, cholesterol 320 mg/dL, no hematuria/hypertension. Which diagnosis and cause fit best?", "opts": ["Nephrotic syndrome due to minimal change disease", "Nephritic syndrome due to IgA nephropathy", "Diabetic nephropathy", "Acute pyelonephritis"], "correct": 0}, {"q": "A 45-year-old has proteinuria 5 g/day, hypoalbuminemia, and edema; no diabetes, infection, or malignancy found. Which primary cause is statistically most likely?", "opts": ["Membranous nephropathy", "Minimal change disease", "Diabetic nephropathy", "Chronic pyelonephritis"], "correct": 0}, {"q": "Which sequence correctly explains how a single glomerular barrier injury can cause both hyperlipidemia and increased infection risk?", "opts": ["↑permeability → protein loss (albumin, complement, Ig) → hepatic ↑LDL/VLDL (hyperlipidemia) AND loss of complement/Ig (infection risk)", "↑permeability → hyperalbuminemia → decreased hepatic synthesis → hypolipidemia", "Infection directly causes glomerular injury and hyperlipidemia independently", "Hyperlipidemia causes glomerular injury, which then causes infection"], "correct": 0}, {"q": "A diabetic patient has albuminuria on 2 of 3 urine collections over 4 months, diabetic retinopathy, hypertension, and declining GFR, with no other renal disease. This best fits:", "opts": ["Diabetic nephropathy", "Minimal change disease", "Henoch-Schönlein purpura", "Acute nephritic syndrome"], "correct": 0}, {"q": "Which statement correctly contrasts SLE nephritis and Henoch-Schönlein purpura mechanisms?", "opts": ["Both are immune-complex-mediated, but SLE involves autoantibodies affecting nearly any organ while HSP involves systemic IgA deposition with a purpura-abdominal pain-arthritis triad", "Both are caused by direct bacterial invasion of the glomerulus", "SLE only affects children; HSP only affects adults", "Neither involves immune complexes"], "correct": 0}, {"q": "A patient in \"renal insufficiency\" stage (GFR 25%) is most likely to already show which finding, versus a finding more typical of later stages?", "opts": ["Early: mild anemia from ↓EPO; Later: marked bleeding tendency from platelet dysfunction", "Early: severe uremic bleeding; Later: mild anemia", "Both findings appear identically at all GFR levels", "Neither finding relates to GFR stage"], "correct": 0}, {"q": "Why does isolated tubular toxicity (e.g. aminoglycosides) not typically cause nephrotic-range proteinuria, despite causing chronic renal failure?", "opts": ["Nephrotic syndrome requires glomerular barrier injury, which tubular toxicity does not primarily cause", "Tubular toxicity always causes more proteinuria than glomerular disease", "Aminoglycosides directly damage podocytes", "Tubular toxicity is a form of nephrotic syndrome"], "correct": 0}, {"q": "A nephrotic patient develops DVT. Which molecular deficiency explains this, and which separate lost protein explains this patient's edema?", "opts": ["Antithrombin III loss (DVT) and albumin loss (edema)", "Albumin loss (DVT) and antithrombin III loss (edema)", "Complement loss (DVT) and immunoglobulin loss (edema)", "Fibrinogen loss (DVT) and vitamin D loss (edema)"], "correct": 0}, {"q": "Is the RAAS activation in nephrotic edema the same process as the salt/water retention mechanism in chronic renal failure?", "opts": ["No — nephrotic RAAS activation is a compensatory response to perceived volume depletion, while CRF retention results directly from reduced excretory capacity", "Yes, they are identical mechanisms", "RAAS is only relevant in CRF, not nephrotic syndrome", "Salt/water retention in CRF is caused by antithrombin III loss"], "correct": 0}, {"q": "A biopsy shows irreversible glomerular and tubulointerstitial fibrosis after recurrent acute glomerulonephritis. What is the expected trajectory if untreated?", "opts": ["Progression to CKD, ESRD, and cardiovascular disease", "Complete spontaneous resolution", "Isolated reversible tubular injury", "Conversion to minimal change disease"], "correct": 0}, {"q": "Why can nephritic and nephrotic syndrome features theoretically overlap in one patient?", "opts": ["Both arise from injury to the same three-layered filtration barrier, just with different severity/pattern of injury", "They involve entirely separate organs", "Nephritic syndrome never involves the glomerulus", "Nephrotic syndrome only involves the bladder"], "correct": 0}, {"q": "The lecture notes that endothelial, GBM, or podocyte damage \"may be seen in any one type of nephrotic syndrome.\" This implies:", "opts": ["Different glomerular diseases may injure different or multiple barrier components, all converging on massive proteinuria", "Only one specific barrier layer can ever be damaged in nephrotic syndrome", "Nephrotic syndrome never involves the GBM", "Endothelial damage always occurs alone"], "correct": 0}, {"q": "A patient with hepatitis C develops new-onset nephrotic syndrome. Besides infection, which other secondary-cause categories exist per the lecture?", "opts": ["Metabolic/systemic disease, malignancy, and drugs", "Genetic, congenital, and idiopathic causes only", "Purely mechanical causes", "Purely psychological causes"], "correct": 0}, {"q": "A patient has ↑creatinine/BUN, hematuria, RBC casts, hypertension, non-selective proteinuria, but no hyperlipidemia/lipiduria. Which syndrome, and what argues against the alternative?", "opts": ["Nephritic syndrome; absence of hyperlipidemia/lipiduria argues against nephrotic syndrome", "Nephrotic syndrome; absence of RBC casts argues against nephritic syndrome", "Diabetic nephropathy; hematuria confirms this diagnosis", "Polycystic kidney disease; RBC casts are diagnostic"], "correct": 0}, {"q": "A CRF patient has both hypertension and bleeding tendency. Are these mediated by the same pathway?", "opts": ["No — hypertension results from salt/water retention; bleeding results from platelet dysfunction", "Yes — both result from erythropoietin deficiency", "Yes — both result from vitamin D deficiency", "No — hypertension results from platelet dysfunction; bleeding from salt retention"], "correct": 0}, {"q": "Why does diabetic nephropathy's early increased GFR seem to contradict \"glomerular dysfunction lowers GFR\"?", "opts": ["Diabetic nephropathy causes early glomerular hyperfiltration, a distinct early pathologic change, before GFR eventually falls", "GFR never changes in diabetic nephropathy", "The general principle is wrong and does not apply to any glomerular disease", "Diabetic nephropathy never involves glomerular injury"], "correct": 0}, {"q": "SLE-mediated glomerular disease is best classified as:", "opts": ["Immunological (autoantibody immune complexes depositing along the GBM)", "Hemodynamic (caused by hypertension)", "Toxic (caused by drugs)", "Genetic (inherited mutation)"], "correct": 0}, {"q": "A nephrotic patient has both proteinuria and complement depletion. What clinical risk does this combination specifically predict?", "opts": ["Increased infection risk, from impaired humoral immune defense", "Increased risk of hyperglycemia", "Increased risk of hypertension only", "Decreased risk of thrombosis"], "correct": 0}, {"q": "Which age framing does the lecture use for HSP versus SLE nephritis, and what do they share mechanistically?", "opts": ["HSP: children/adolescents; SLE: adults — both share immune-complex-mediated glomerular injury", "HSP: adults; SLE: children — both share bacterial infection as the cause", "Both occur exclusively in elderly patients", "Neither involves immune complexes"], "correct": 0}, {"q": "Match: low antithrombin III, low complement, low albumin, high LDL to their nephrotic complications, in that order.", "opts": ["Hypercoagulability; infection risk; edema/hypovolemia; hyperlipidemia/atherosclerosis", "Infection risk; hypercoagulability; hyperlipidemia; edema", "Edema; hyperlipidemia; infection risk; hypercoagulability", "All four cause the same single complication"], "correct": 0}, {"q": "Why does the lecture base CRF staging specifically on GFR rather than symptoms alone?", "opts": ["GFR is a direct, quantifiable measure of filtering capacity that correlates with progressively worsening metabolic consequences", "Symptoms are always more reliable than GFR", "GFR cannot be measured clinically", "Symptoms and GFR are unrelated in CRF"], "correct": 0}, {"q": "A patient has palpable purpura, abdominal pain, arthritis, and hematuria. What deposits in the glomerulus, and how does this relate to IgA nephropathy?", "opts": ["IgA immune complexes deposit in the glomerulus; HSP is considered a systemic form of IgA nephropathy", "IgG complexes deposit; unrelated to IgA nephropathy", "No immune complexes are involved; this is a purely genetic disease", "Complement alone deposits, unrelated to any antibody"], "correct": 0}, {"q": "Why might \"stress\" be listed alongside metabolic, hemodynamic, and toxic causes of glomerular disease?", "opts": ["Non-immunological factors like stress can contribute to or amplify glomerular injury, alone or combined with immune mechanisms", "Stress is the only cause of all glomerular disease", "Stress has no physiological connection to kidney disease", "Stress only causes tubular, never glomerular, disease"], "correct": 0}, {"q": "A polycystic kidney disease patient has hypertension and dilute urine. What structural process links both findings?", "opts": ["Cyst enlargement compresses/destroys nephron tissue, impairing concentration and activating pressor mechanisms", "Cysts secrete excess erythropoietin, causing both findings", "Cysts only affect the bladder wall", "Cysts increase vitamin D production, causing hypertension"], "correct": 0}, {"q": "The four-stage CRF classification applies primarily to which type of renal failure, and why?", "opts": ["Chronic renal failure, since it reflects progressive, ongoing GFR decline over time", "Acute renal failure, since it always resolves in stages", "Both equally, since staging is universal", "Neither — staging applies only to nephrotic syndrome"], "correct": 0}, {"q": "Amyloidosis-associated nephrotic syndrome is classified as secondary. Which two other categories share this classification?", "opts": ["Infections and malignancy", "Minimal change disease and membranous nephropathy", "Focal segmental glomerulosclerosis and MPGN", "Genetic and congenital causes"], "correct": 0}, {"q": "How does complement loss differ mechanistically from antithrombin III loss in nephrotic syndrome complications?", "opts": ["Complement loss impairs infection defense; antithrombin III loss promotes thrombosis via the coagulation cascade", "Both cause the identical complication of thrombosis", "Complement loss causes edema; antithrombin III loss causes infection", "Neither has any clinical consequence"], "correct": 0}, {"q": "A patient with interstitial nephritis has polyuria and mild renal impairment without proteinuria. Why is this consistent with the lecture?", "opts": ["Interstitial nephritis affects tubules/interstitium, not glomeruli, and glomerular injury is essential for nephrotic syndrome", "Interstitial nephritis always causes massive proteinuria", "Interstitial nephritis is a subtype of nephrotic syndrome", "Polyuria never occurs in tubular disease"], "correct": 0}, {"q": "Trace the full pathway from SLE-related glomerular injury to eventual chronic kidney disease.", "opts": ["Immune complex deposition along GBM → glomerular inflammation → nephrotic/nephritic injury → chronic glomerulonephritis with fibrosis → ↓GFR/uremic toxin retention → CKD/ESRD", "Immune complex deposition → immediate ESRD with no intermediate steps", "Glomerular injury → spontaneous resolution → no further progression", "SLE never leads to any renal outcome"], "correct": 0}, {"q": "What does the distinction between \"albuminuria alone\" and \"leakage of all plasma proteins\" imply about disease severity?", "opts": ["It reflects a spectrum where milder injury permits selective albumin loss and more severe injury causes non-selective protein loss", "It implies these are two entirely unrelated diseases", "It implies proteinuria severity has no relation to glomerular barrier integrity", "It implies albuminuria is always more severe than non-selective proteinuria"], "correct": 0}, {"q": "A 30-year-old with SLE develops nephrotic syndrome, then biopsy at 6 months shows irreversible fibrosis. What has occurred, and what is the likely outcome if untreated?", "opts": ["Progression to chronic glomerulonephritis; likely outcome is CKD, ESRD, and cardiovascular disease", "Complete reversal of kidney disease", "Conversion to minimal change disease", "Development of polycystic kidney disease"], "correct": 0}, {"q": "Why do hyperphosphatemia and hypocalcemia occur together in chronic renal failure?", "opts": ["Decreased vitamin D reduces calcium absorption (hypocalcemia) while declining GFR reduces phosphate excretion (hyperphosphatemia)", "They are entirely unrelated and coincidental", "Hypocalcemia causes hyperphosphatemia through increased renal excretion", "Hyperphosphatemia causes increased vitamin D production"], "correct": 0}, {"q": "MPGN-associated nephrotic syndrome is classified under which category, alongside which three other diseases?", "opts": ["Primary (idiopathic), alongside minimal change disease, membranous nephropathy, and FSGS", "Secondary, alongside diabetes, amyloidosis, and infections", "Genetic, alongside polycystic kidney disease", "Toxic, alongside NSAID and heavy metal nephropathy"], "correct": 0}, {"q": "Why would a clinician hesitate to diagnose diabetic nephropathy from a single albuminuria measurement over two weeks without retinopathy or hypertension?", "opts": ["The definition requires chronic albuminuria (3-6 months, ≥2 of 3 collections) plus associated retinopathy, hypertension, and declining GFR", "A single measurement is always sufficient for diagnosis", "Retinopathy and hypertension are irrelevant to the diagnosis", "Diabetic nephropathy can be diagnosed within 24 hours"], "correct": 0}, {"q": "How does RAAS activation relate to the \"hypovolemia\" listed as a metabolic consequence of nephrotic syndrome?", "opts": ["Hypoalbuminemia-driven fluid shift causes perceived volume depletion, triggering RAAS, which retains fluid that also leaks into tissues, worsening edema", "RAAS activation directly causes hypervolemia with no edema", "Hypovolemia is unrelated to hypoalbuminemia", "RAAS activation cures the hypovolemia completely"], "correct": 0}, {"q": "A biopsy shows normal glomeruli on light microscopy but podocyte foot process effacement on electron microscopy in a heavily proteinuric patient. Diagnosis and typical age group?", "opts": ["Minimal change disease; most common in children", "Membranous nephropathy; most common in children", "FSGS; most common in adults only", "MPGN; most common in infants"], "correct": 0}, {"q": "Compare expected BUN/creatinine trends in nephritic syndrome versus early diabetic nephropathy.", "opts": ["Nephritic syndrome: rising BUN/creatinine from ↓GFR; early diabetic nephropathy: GFR increased, so no rise expected yet", "Both show identical rising BUN/creatinine from the start", "Nephritic syndrome shows falling BUN/creatinine; diabetic nephropathy shows rising", "Neither condition affects BUN/creatinine at any stage"], "correct": 0}, {"q": "Is it a contradiction that hypertension is listed as both a cause and a consequence of glomerular/renal disease?", "opts": ["No — hypertension can be a primary hemodynamic cause of glomerular injury, and separately a downstream consequence of renal failure's salt/water retention", "Yes — this is a factual contradiction in the lecture", "Hypertension can only ever be a cause, never a consequence", "Hypertension can only ever be a consequence, never a cause"], "correct": 0}, {"q": "Why are nephrotic patients at combined risk for atherosclerotic and thrombotic events via two distinct proteins?", "opts": ["Hyperlipidemia (from ↑hepatic LDL/VLDL) promotes atherosclerosis; antithrombin III loss promotes thrombosis", "Both risks arise from albumin loss alone", "Atherosclerosis risk comes from antithrombin III loss; thrombosis from LDL", "Neither risk is increased in nephrotic syndrome"], "correct": 0}, {"q": "Which causal chain best integrates how acute nephritic syndrome could culminate in ESRD years later?", "opts": ["Acute GBM/podocyte injury → recurrent/unresolved inflammation → chronic glomerulonephritis with fibrosis → progressive GFR decline through CRF stages → ESRD", "Acute nephritic syndrome always resolves completely with no risk of progression", "ESRD develops independently of any glomerular injury", "Nephritic syndrome converts directly to polycystic kidney disease"], "correct": 0}]};
+let quizLevel = 'easy';
+let quizData = quizLevels[quizLevel];
+
+let quizScore = 0;
+let quizAnswered = 0;
+const quizList = document.getElementById('quizList');
+const quizScoreEl = document.getElementById('quizScore');
+const quizTotalEl = document.getElementById('quizTotal');
+const quizLevelBtns = document.querySelectorAll('[data-quizlevel]');
+
+function shuffleOptions(question){
+  const withIndex = question.opts.map((text,i)=>({text, isCorrect:i===question.correct}));
+  for(let i=withIndex.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [withIndex[i],withIndex[j]]=[withIndex[j],withIndex[i]];
+  }
+  return withIndex;
+}
+
+function renderQuiz(){
+  quizData = quizLevels[quizLevel];
+  document.getElementById('quizTag').textContent = quizData.length + ' questions';
+  quizTotalEl.textContent = quizData.length;
+  quizLevelBtns.forEach(b=>b.classList.toggle('active', b.dataset.quizlevel===quizLevel));
+  quizList.innerHTML='';
+  quizScore=0; quizAnswered=0;
+  quizScoreEl.textContent='0';
+  quizData.forEach((q,idx)=>{
+    const shuffled = shuffleOptions(q);
+    const card = document.createElement('div');
+    card.className='q-card';
+    const optionLetters=['A','B','C','D','E','F'];
+    card.innerHTML = `
+      <div class="q-num">Question ${idx+1}</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-options"></div>
+      <div class="q-explain"></div>
+    `;
+    const optWrap = card.querySelector('.q-options');
+    const explainEl = card.querySelector('.q-explain');
+    shuffled.forEach((opt,oi)=>{
+      const btn = document.createElement('button');
+      btn.className='q-opt';
+      btn.innerHTML = `<span class="marker">${optionLetters[oi]}</span><span>${opt.text}</span>`;
+      btn.addEventListener('click',()=>{
+        if(optWrap.dataset.locked) return;
+        optWrap.dataset.locked='1';
+        [...optWrap.children].forEach(b=>b.classList.add('disabled'));
+        if(opt.isCorrect){
+          btn.classList.add('correct');
+          quizScore++;
+        } else {
+          btn.classList.add('wrong');
+          const correctBtn = [...optWrap.children].find((b,i)=>shuffled[i].isCorrect);
+          if(correctBtn) correctBtn.classList.add('correct');
+        }
+        quizAnswered++;
+        quizScoreEl.textContent = quizScore;
+        explainEl.classList.add('show');
+        explainEl.textContent = opt.isCorrect ? 'Correct.' : 'Not quite — the highlighted option is correct.';
+      });
+      optWrap.appendChild(btn);
+    });
+    quizList.appendChild(card);
+  });
+}
+quizLevelBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    quizLevel = btn.dataset.quizlevel;
+    renderQuiz();
+  });
+});
+document.getElementById('quizReset').addEventListener('click', renderQuiz);
+renderQuiz();
+</script>
+</body>
+</html>
